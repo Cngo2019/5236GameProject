@@ -26,8 +26,8 @@ public class BulletBehavior : MonoBehaviour
 
     private bool isOffScreen() {
 
-        float cameraHorizontalBoundary = CameraBoundary.getCameraHorizontalBoundary("Main Camera");
-        float cameraVerticalBoundary = CameraBoundary.getCameraVerticalBoundary("Main Camera");
+        float cameraHorizontalBoundary = CameraBoundary.getCameraHorizontalBoundary("MainCamera");
+        float cameraVerticalBoundary = CameraBoundary.getCameraVerticalBoundary("MainCamera");
 
         return 
         transform.position.x > cameraHorizontalBoundary || 
