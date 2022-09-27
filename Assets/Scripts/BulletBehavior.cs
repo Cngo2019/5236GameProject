@@ -6,16 +6,11 @@ public class BulletBehavior : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody2D rb;
-    private float cameraHorizontalBoundary;
-    private float cameraVerticalBoundary;
 
     // Start is called before the first frame update
     void Start()
     {
-        Camera camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        cameraVerticalBoundary = camera.orthographicSize;
-        cameraHorizontalBoundary = camera.aspect * cameraVerticalBoundary;
-
+        
         Vector3 direction = GameObject.Find("Character").transform.right;
         direction.Normalize();
         rb.velocity = direction * 15f;
@@ -30,6 +25,10 @@ public class BulletBehavior : MonoBehaviour
     }
 
     private bool isOffScreen() {
+
+        float cameraHorizontalBoundary = CameraBoundary.getCameraHorizontalBoundary("Main Camera");
+        float cameraVerticalBoundary = CameraBoundary.getCameraVerticalBoundary("Main Camera");
+
         return 
         transform.position.x > cameraHorizontalBoundary || 
         transform.position.x < cameraHorizontalBoundary * -1 || 
