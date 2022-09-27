@@ -10,51 +10,81 @@ public class Character : MonoBehaviour
 
     [SerializeField] private float movementSpeed;
     [SerializeField] private GameObject bullet;
-    private Vector2 positionChange;
+    [SerializeField] private float canShootCoolDown;
+    private bool canShoot;
+    private float timer;
     // Start is called before the first frame update
     void Start() 
     {
-        positionChange = Vector2.zero;
+        timer = 0;
+        canShoot = true;
     }
 
     // Update is called once per frame
 
     void Update () {
+        rotateCharacterTowardsMouse();
+        checkForMovementInput();
+        checkForFiringInput();
+    }
 
-        rotateCharacter();
+    private void rotateCharacterTowardsMouse() {
+        // Get the world position of the mouse 
+        Vector3 mouseWorldPos = gameCamera.ScreenToWorldPoint(Input.mousePosition);
+        // set z to 0
+        mouseWorldPos.z = 0f;
+        // Turn the right vector 
+        transform.right = mouseWorldPos - transform.position;
+    }
 
+
+    /**
+    In each statement, we:
+    1. Record the basic WASD key inputs
+    2. Set the amount we want to travel
+    3. Move to that position
+    **/
+    private void checkForMovementInput() {
+        
         if (Input.GetKey(KeyCode.W)) {
-            positionChange = new Vector2(0f, .1f);
+            Vector2 positionChange = new Vector2(0f, .1f);
             rb.MovePosition(rb.position + positionChange);
         }
 
         if (Input.GetKey(KeyCode.S)) {
-           positionChange = new Vector2(0f, -.1f);
+           Vector2 positionChange = new Vector2(0f, -.1f);
            rb.MovePosition(rb.position + positionChange);
         }
 
         if (Input.GetKey(KeyCode.A)) {
-            positionChange = new Vector2(-.1f, 0f);
+            Vector2 positionChange = new Vector2(-.1f, 0f);
             rb.MovePosition(rb.position + positionChange);
         }
 
         if (Input.GetKey(KeyCode.D)) {
-            positionChange = new Vector2(.1f, 0f);
+            Vector2 positionChange = new Vector2(.1f, 0f);
             rb.MovePosition(rb.position + positionChange);
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+    private void checkForFiringInput() {
 
-            Vector2 characterFacing = transform.forward;
+        // If player presses space bar and is able to shoot
+        if (Input.GetKey(KeyCode.Space) && canShoot) {
+            // Create a bullet on top of the player
             GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
-    
+            // set the timer value to start at the cooldown's seconds
+            timer = canShootCoolDown;
+            // set the can shoot state to false so they can't shoot while on cooldown
+            canShoot = false;
         }
 
+        // If timer is greater than zero then subtract it down. otherwise this means we can shoot again.
+        if (timer >= 0) {
+            timer -= Time.deltaTime;
+        } else {
+            canShoot = true;
+        }
     }
 
-    private void rotateCharacter() {
-        Vector3 mouseWorldPos = gameCamera.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPos.z = 0f;
-        transform.right = mouseWorldPos - transform.position;
-    }
 }
