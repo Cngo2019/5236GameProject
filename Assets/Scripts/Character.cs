@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
         rotateCharacterTowardsMouse();
         checkForMovementInput();
         checkForFiringInput();
+        clampPlayer();
     }
 
     private void rotateCharacterTowardsMouse() {
@@ -92,6 +93,16 @@ public class Character : MonoBehaviour
         } else {
             canShoot = true;
         }
+    }
+
+    private void clampPlayer() {
+        Vector2 charPosition = transform.position;
+        float horizontalBoundary = CameraBoundary.getCameraHorizontalBoundary("MainCamera");
+        float verticalBoundary = CameraBoundary.getCameraVerticalBoundary("MainCamera");
+        charPosition.x = Mathf.Clamp(charPosition.x, -horizontalBoundary + .25f, horizontalBoundary - .25f);
+        charPosition.y = Mathf.Clamp(charPosition.y, -verticalBoundary + .25f, verticalBoundary - .25f);
+
+        transform.position = new Vector2(charPosition.x, charPosition.y);
     }
 
 }

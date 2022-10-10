@@ -6,6 +6,7 @@ public class LevelController : MonoBehaviour
 {
 
     [SerializeField] private float spawnIntervalSec;
+    [SerializeField] GameObject enemy;
     private float spawnTimer;
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,32 @@ public class LevelController : MonoBehaviour
     }
 
     private void spawnEnemyZombie() {
-        
+        float cameraHorizontalBoundary = CameraBoundary.getCameraHorizontalBoundary("MainCamera");
+        float cameraVerticalBoundary = CameraBoundary.getCameraVerticalBoundary("MainCamera");
+
+        float spawnCoordinateX = randomizeSpawn(cameraHorizontalBoundary);
+        float spawnCoordinateY = randomizeSpawn(cameraVerticalBoundary);
+
+
+        GameObject bulletInstance = Instantiate(
+            enemy,
+            new Vector3(spawnCoordinateX, spawnCoordinateY, 0f),
+            Quaternion.identity
+        );
+
+    }
+
+    private float randomizeSpawn(float boundaryCoordinate) {
+        int randInt = Random.Range(0, 2);
+        int spawnArea = Random.Range(0, 10);
+        if (randInt == 0) {
+            boundaryCoordinate = -1f * boundaryCoordinate;
+            boundaryCoordinate -= spawnArea * 1f;
+        }
+
+        boundaryCoordinate += spawnArea * 1f;
+
+        return boundaryCoordinate;
+
     }
 }
