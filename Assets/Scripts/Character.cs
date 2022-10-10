@@ -49,22 +49,29 @@ public class Character : MonoBehaviour
         if (Input.GetKey(KeyCode.W)) {
             Vector2 positionChange = new Vector2(0f, .1f);
             rb.MovePosition(rb.position + positionChange);
+            return;
         }
 
         if (Input.GetKey(KeyCode.S)) {
            Vector2 positionChange = new Vector2(0f, -.1f);
            rb.MovePosition(rb.position + positionChange);
+           return;
         }
 
         if (Input.GetKey(KeyCode.A)) {
             Vector2 positionChange = new Vector2(-.1f, 0f);
             rb.MovePosition(rb.position + positionChange);
+            return;
         }
 
         if (Input.GetKey(KeyCode.D)) {
             Vector2 positionChange = new Vector2(.1f, 0f);
             rb.MovePosition(rb.position + positionChange);
+            return;
         }
+
+        rb.velocity = Vector2.zero;
+        return;
     }
 
     private void checkForFiringInput() {
