@@ -10,25 +10,38 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float hp;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float minSpeed;
-    
+    [SerializeField] private float standStillSeconds;
+
+    [SerializeField] private float playerDamage;
+    bool standStill;
+    private float timer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        standStill = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 charPosition = GameObject.Find("Character").transform.position;
-
-        if (charPosition != null) {
+        if (GameObject.Find("Character") != null && !standStill) {
+            Vector2 charPosition = GameObject.Find("Character").transform.position;
             chaseCharacter(charPosition);
         }
 
-        if (hp <= 0) {
+        if (standStill) {
+            if (timer >= 0) {
+            timer -= Time.deltaTime;;
+            } else {
+                standStill = false;
+            }
+        }
+
+
+         if (hp <= 0) {
             GameObject.Destroy(gameObject);
         }
+        
     }
 
     private void chaseCharacter(Vector2 charPosition) {
@@ -42,6 +55,13 @@ public class EnemyMovement : MonoBehaviour
 
         if (obj.tag == "Bullet") {
             hp -= 50;
+        }
+
+        if (obj.tag == "Player" && GameObject.Find("Character") != null) {
+            standStill = true;
+            rb.velocity = Vector2.zero;
+            timer = standStillSeconds;
+            obj.GetComponent<Character>().reduceHealth(playerDamage);
         }
 
     }

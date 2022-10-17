@@ -124,6 +124,8 @@ MonoBehaviour:
   hp: 100
   maxSpeed: 5
   minSpeed: 4
+  standStillSeconds: 1
+  playerDamage: 10
 --- !u!61 &1964292855950136891
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -19,6 +19,14 @@ PrefabInstance:
       propertyPath: minSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 882344668158218464, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
+      propertyPath: playerDamage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 882344668158218464, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
+      propertyPath: standStillSeconds
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2774608016099196248, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
       propertyPath: m_RootOrder
       value: 0

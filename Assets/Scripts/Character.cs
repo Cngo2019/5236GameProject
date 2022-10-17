@@ -11,13 +11,18 @@ public class Character : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float canShootCoolDown;
+
     private bool canShoot;
     private float timer;
+
+    private float health;
+
     // Start is called before the first frame update
     void Start() 
     {
         timer = 0;
         canShoot = true;
+        health = 100;
     }
 
     // Update is called once per frame
@@ -27,6 +32,11 @@ public class Character : MonoBehaviour
         checkForMovementInput();
         checkForFiringInput();
         clampPlayer();
+
+        if (health <= 0) {
+            GameObject.Destroy(gameObject);
+        }
+
     }
 
     private void rotateCharacterTowardsMouse() {
@@ -103,6 +113,18 @@ public class Character : MonoBehaviour
         charPosition.y = Mathf.Clamp(charPosition.y, -verticalBoundary + .25f, verticalBoundary - .25f);
 
         transform.position = new Vector2(charPosition.x, charPosition.y);
+    }
+
+        void OnCollisionEnter2D(Collision2D collision) {
+            GameObject obj = collision.gameObject;
+
+            if (obj.tag == "Enemy") {
+                health -= 2;
+            }
+        }
+
+    public void reduceHealth(float amount) {
+        this.health = health - amount;
     }
 
 }
