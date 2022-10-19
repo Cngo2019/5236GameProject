@@ -137,6 +137,6 @@ public class Character : MonoBehaviour
     }
 
     public void decreaseShootCD() {
-        this.canShootCoolDown -= .2f;
+        this.canShootCoolDown -= .15f;
     }
 }

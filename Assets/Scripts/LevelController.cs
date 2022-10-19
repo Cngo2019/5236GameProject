@@ -109,7 +109,7 @@ public class LevelController : MonoBehaviour
     private void startNextLevel() {
         level += 1;
         spawnIntervalSec -= 1;
-        killRequirement = level * 5;
+        killRequirement = level * 10;
         player.GetComponent<Character>().setHealth(100);
     }
 
