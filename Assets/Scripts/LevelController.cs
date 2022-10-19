@@ -7,11 +7,23 @@ public class LevelController : MonoBehaviour
 
     [SerializeField] private float spawnIntervalSec;
     [SerializeField] GameObject enemy;
+    [SerializeField] GameObject enemy2;
+    [SerializeField] GameObject enemy3;
+
+    private GameObject player;
+    
+    private float killRequirement;
     private float spawnTimer;
+    private int level;
+
+    private bool hudInstantiated;
     // Start is called before the first frame update
     void Start()
     {
+        level = 1;
         spawnTimer = spawnIntervalSec;
+        killRequirement = 10;
+        player = GameObject.Find("Character");
 
     }
 
@@ -22,11 +34,23 @@ public class LevelController : MonoBehaviour
              spawnTimer -= Time.deltaTime;
          } else {
             //spawn enemy outside of camera view
-            spawnEnemyZombie();
+            if (killRequirement > 0)
+                spawnEnemyZombie();
            // reset spawn timer
             spawnTimer = spawnIntervalSec;
          }
 
+         if (killRequirement <= 0) {
+            /**
+            Display HUD option 285, 193
+            If they press a key then start the next level
+            **/
+
+            
+            player.GetComponent<Character>().decreaseShootCD();
+            player.GetComponent<Character>().increaseMS();
+            startNextLevel();
+         }
     }
 
     private void spawnEnemyZombie() {
@@ -36,12 +60,30 @@ public class LevelController : MonoBehaviour
         float spawnCoordinateX = randomizeSpawn(cameraHorizontalBoundary);
         float spawnCoordinateY = randomizeSpawn(cameraVerticalBoundary);
 
+        if (level == 1) {
+            GameObject zombieInstance = Instantiate(
+                enemy,
+                new Vector3(spawnCoordinateX, spawnCoordinateY, 0f),
+                Quaternion.identity
+            );
+        }
 
-        GameObject bulletInstance = Instantiate(
-            enemy,
-            new Vector3(spawnCoordinateX, spawnCoordinateY, 0f),
-            Quaternion.identity
-        );
+        if (level == 2) {
+            GameObject zombieInstance = Instantiate(
+                enemy2,
+                new Vector3(spawnCoordinateX, spawnCoordinateY, 0f),
+                Quaternion.identity
+            );
+        }
+
+        if (level == 3) {
+            GameObject zombieInstance = Instantiate(
+                enemy3,
+                new Vector3(spawnCoordinateX, spawnCoordinateY, 0f),
+                Quaternion.identity
+            );
+        }
+            
 
     }
 
@@ -57,5 +99,21 @@ public class LevelController : MonoBehaviour
 
         return boundaryCoordinate;
 
+    }
+
+    public void reduceKillCount() {
+        this.killRequirement -= 1;
+        Debug.Log(killRequirement);
+    }
+
+    private void startNextLevel() {
+        level += 1;
+        spawnIntervalSec -= 1;
+        killRequirement = level * 5;
+        player.GetComponent<Character>().setHealth(100);
+    }
+
+    public float getKillRequirement() {
+        return this.killRequirement;
     }
 }

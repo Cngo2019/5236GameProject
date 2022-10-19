@@ -13,12 +13,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float standStillSeconds;
 
     [SerializeField] private float playerDamage;
+    GameObject levelController;
     bool standStill;
     private float timer;
     // Start is called before the first frame update
     void Start()
     {
         standStill = false;
+        levelController = GameObject.Find("LevelController");
     }
 
     // Update is called once per frame
@@ -39,6 +41,11 @@ public class EnemyMovement : MonoBehaviour
 
 
          if (hp <= 0) {
+            levelController.GetComponent<LevelController>().reduceKillCount();
+            GameObject.Destroy(gameObject);
+        }
+        
+        if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
             GameObject.Destroy(gameObject);
         }
         

@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
     private float timer;
 
     private float health;
+    
 
     // Start is called before the first frame update
     void Start() 
@@ -58,25 +59,25 @@ public class Character : MonoBehaviour
     private void checkForMovementInput() {
         
         if (Input.GetKey(KeyCode.W)) {
-            Vector2 positionChange = new Vector2(0f, .1f);
+            Vector2 positionChange = new Vector2(0f, movementSpeed);
             rb.MovePosition(rb.position + positionChange);
             return;
         }
 
         if (Input.GetKey(KeyCode.S)) {
-           Vector2 positionChange = new Vector2(0f, -.1f);
+           Vector2 positionChange = new Vector2(0f, movementSpeed * -1f);
            rb.MovePosition(rb.position + positionChange);
            return;
         }
 
         if (Input.GetKey(KeyCode.A)) {
-            Vector2 positionChange = new Vector2(-.1f, 0f);
+            Vector2 positionChange = new Vector2(movementSpeed * -1f , 0f);
             rb.MovePosition(rb.position + positionChange);
             return;
         }
 
         if (Input.GetKey(KeyCode.D)) {
-            Vector2 positionChange = new Vector2(.1f, 0f);
+            Vector2 positionChange = new Vector2(movementSpeed, 0f);
             rb.MovePosition(rb.position + positionChange);
             return;
         }
@@ -127,4 +128,15 @@ public class Character : MonoBehaviour
         this.health = health - amount;
     }
 
+    public void setHealth(float health) {
+        this.health = health;
+    }
+
+    public void increaseMS() {
+        this.movementSpeed += .05f;
+    }
+
+    public void decreaseShootCD() {
+        this.canShootCoolDown -= .2f;
+    }
 }

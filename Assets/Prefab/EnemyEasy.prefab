@@ -126,6 +126,7 @@ MonoBehaviour:
   minSpeed: 4
   standStillSeconds: 1
   playerDamage: 10
+  levelController: {fileID: 6929713917469617494, guid: 9bd01145396c6bf4981c9965182dc8ef, type: 3}
 --- !u!61 &1964292855950136891
 BoxCollider2D:
   m_ObjectHideFlags: 0

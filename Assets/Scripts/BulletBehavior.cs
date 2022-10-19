@@ -37,9 +37,7 @@ public class BulletBehavior : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("hit an enemy");
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Obstacle") {
-            Debug.Log("hit an enemy");
             GameObject.Destroy(gameObject);
         }
     }
