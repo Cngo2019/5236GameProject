@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class Character : MonoBehaviour
 
         if (health <= 0) {
             GameObject.Destroy(gameObject);
+            SceneManager.LoadScene("DeadMenu");
         }
 
     }
