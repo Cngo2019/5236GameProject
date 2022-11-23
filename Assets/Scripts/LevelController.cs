@@ -14,7 +14,7 @@ public class LevelController : MonoBehaviour
     private GameObject player;
     
     [SerializeField] private float killRequirement;
-    [SerializeField] private float spawnTimer;
+    private float spawnTimer;
 
     private bool hudInstantiated;
     // Start is called before the first frame update

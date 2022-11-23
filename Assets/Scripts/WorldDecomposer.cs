@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class WorldDecomposer : MonoBehaviour {
 
-    [SerializeField] private Camera mainCamera;
 	[SerializeField] private int currentLevel;
+
+	[SerializeField] private GameObject obstacle;
 
 	private Node [,] worldData;
 	private int nodeSize;
@@ -51,12 +52,20 @@ public class WorldDecomposer : MonoBehaviour {
 				
 				float x = startX + nodeCenterOffset + (nodeSize * col);
 				float y = startY + nodeCenterOffset + (nodeSize * row);
-				Debug.Log("row, col " + row + " " + col + " has been mapped to" + y +" " + x);
-				worldData [row, col] = new Node(row, col, y, x, false);
+				//Debug.Log("row, col " + row + " " + col + " has been mapped to" + y +" " + x);
+				worldData [row, col] = new Node(row, col, y, x, true);
 			}
 		}
 
 		foreach(Vector2 coord in generateWalls()) {
+			worldData[(int) coord.y, (int) coord.x].setIsPathable(false);
+
+
+			float worldPositionX = worldData[(int) coord.y, (int) coord.x].getWorldX();
+			float worldPositionY = worldData[(int) coord.y, (int) coord.x].getWorldZ();
+			Vector3 obstaclePosition = new Vector2(worldPositionX, worldPositionY);
+			Object.Instantiate(obstacle, obstaclePosition, Quaternion.Euler(0, .5f, 0));
+
 		}
 
 	}
@@ -64,17 +73,34 @@ public class WorldDecomposer : MonoBehaviour {
 
 	public List<Vector2> generateWalls() {
 		List<Vector2> blockedCoords;
-		if (currentLevel == 1) {
+		if (currentLevel == 2) {
 			blockedCoords = new List<Vector2> {
-				new Vector2(2, 4),
-				new Vector2(2, 5),
-				new Vector2(2, 6),
-				new Vector2(2, 4),
-				new Vector2(2, 5),
-				new Vector2(5, 12),
-				new Vector2(5, 13),
-				new Vector2(5, 14),
-				new Vector2(5, 15),
+				new Vector2(7, 4),
+				new Vector2(7, 5),
+				new Vector2(7, 6),
+				new Vector2(7, 7),
+				new Vector2(7, 8),
+
+				new Vector2(7, 1),
+				new Vector2(8, 1),
+				new Vector2(9, 1),
+				new Vector2(10, 1),
+				new Vector2(11, 1),
+
+				new Vector2(7, 9),
+				new Vector2(8, 9),
+				new Vector2(9, 9),
+				new Vector2(10, 9),
+				new Vector2(11, 9),
+
+				new Vector2(13, 4),
+				new Vector2(13, 5),
+				new Vector2(13, 6),
+				new Vector2(13, 7),
+				new Vector2(13, 8),
+
+
+				
 			};
 			
 		} else {
