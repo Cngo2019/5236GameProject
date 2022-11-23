@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: e6c01a9838dd5174e90dd9de960a4dd6
   - enabled: 1
-    path: Assets/Scenes/MainGame.unity
+    path: Assets/Scenes/Room_1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Room_2.unity
+    guid: 9c10774646d08c3488f31d4eb0035540
+  - enabled: 1
+    path: Assets/Scenes/Room_3.unity
+    guid: 2c660ba8f04a1d64ba24d752c4f3a7ea
   - enabled: 1
     path: Assets/Scenes/DeadMenu.unity
     guid: 9d316eb4bd3985f4fb1359c0154a8183

@@ -12,9 +12,9 @@ public class Character : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float canShootCoolDown;
-
-    private bool canShoot;
-    private float timer;
+    
+    [SerializeField] private bool canShoot;
+    [SerializeField] private float timer;
 
     private float health;
     
@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
         rotateCharacterTowardsMouse();
         checkForMovementInput();
         checkForFiringInput();
-        clampPlayer();
+        //clampPlayer();
 
         if (health <= 0) {
             GameObject.Destroy(gameObject);
