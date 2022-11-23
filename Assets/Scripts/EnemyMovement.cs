@@ -27,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         if (GameObject.Find("Character") != null && !standStill) {
+            // This will be replaced with A star soon
             Vector2 charPosition = GameObject.Find("Character").transform.position;
             chaseCharacter(charPosition);
         }

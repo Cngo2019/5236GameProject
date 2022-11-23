@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class WorldDecomposer : MonoBehaviour {
 
-    [SerializeField] private Camera mainCamera; // The camera (used for getting the target to go to)
+    [SerializeField] private Camera mainCamera;
+	[SerializeField] private int currentLevel;
 
 	private Node [,] worldData;
 	private int nodeSize;
@@ -51,33 +52,38 @@ public class WorldDecomposer : MonoBehaviour {
 				float x = startX + nodeCenterOffset + (nodeSize * col);
 				float y = startY + nodeCenterOffset + (nodeSize * row);
 				Debug.Log("row, col " + row + " " + col + " has been mapped to" + y +" " + x);
-
-
-				Vector3 startPos = new Vector3 (x, y, 0f);
-
-				
-
-				// Does our raycast hit anything at this point in the map
-
-				RaycastHit hit;
-
-				// Does the ray intersect any objects excluding the player layer
-				if (Physics.Raycast (startPos, Vector3.up, out hit, Mathf.Infinity)) {
-					print ("Hit something at row: " + row + " col: " + col + " \n with position " + x + " " + y);
-					//Debug.DrawRay (startPos, Vector3.down * 20, Color.red, 50000);
-					worldData [row, col] = new Node(row, col, y, x, false);
-					
-				} else {
-					//Debug.DrawRay (startPos, Vector3.down * 20, Color.green, 50000);
-					worldData [row, col] = new Node(row, col, y, x, true);
-				}
-
-				//Debug.Log("Grid Position" + (row, col));
-				//Debug.Log("World Position" + (x, z));
+				worldData [row, col] = new Node(row, col, y, x, false);
 			}
 		}
 
+		foreach(Vector2 coord in generateWalls()) {
+			
+		}
+
 	}
+
+
+	public List<Vector2> generateWalls() {
+		List<Vector2> blockedCoords;
+		if (currentLevel == 1) {
+			blockedCoords = new List<Vector2> {
+				new Vector2(2, 4),
+				new Vector2(2, 5),
+				new Vector2(2, 6),
+				new Vector2(2, 4),
+				new Vector2(2, 5),
+				new Vector2(5, 12),
+				new Vector2(5, 13),
+				new Vector2(5, 14),
+				new Vector2(5, 15),
+			};
+			
+		} else {
+			blockedCoords = new List<Vector2> {};
+		}
+
+		return blockedCoords;
+	} 
 	
 
 }
