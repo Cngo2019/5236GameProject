@@ -57,7 +57,6 @@ public class WorldDecomposer : MonoBehaviour {
 		}
 
 		foreach(Vector2 coord in generateWalls()) {
-			
 		}
 
 	}
