@@ -128,7 +128,7 @@ public static class PathFinding
     }
 
     private static List<Node> generatePath(Node goalNode) {
-        Node current = goalNode.getParent();
+        Node current = goalNode;
         List<Node> path = new List<Node>();
         while(current != null) {
             if (!current.getIsPathable()) {

@@ -69,7 +69,7 @@ public class EnemyMovement : MonoBehaviour
 
          if (path.Count > 0) {
             // If our leader is already at the current node location then move on to the next location in the path list
-            if (transform.position.Equals(currentNodeLocation)) {
+            if (Mathf.Approximately(transform.position.magnitude, currentNodeLocation.magnitude)) {
                 //Debug.Log(currentNodeLocation);
                 // Then go to the next node in the path list
                 currentNodeLocation = new Vector2(path[0].getWorldX(), path[0].getWorldZ());
@@ -78,7 +78,7 @@ public class EnemyMovement : MonoBehaviour
             }
 
             // Just continue lerping to our current target location.
-            transform.position = Vector2.Lerp(transform.position, currentNodeLocation, .5f);
+            transform.position = Vector2.Lerp(transform.position, currentNodeLocation, 120f * Time.deltaTime);
            // Debug.Log("Curr position " + currentNodeLocation);
 
         } else {
@@ -108,11 +108,13 @@ public class EnemyMovement : MonoBehaviour
 
         path = PathFinding.generatePath(
             wd.getWorldData(),
-            (int) Mathf.Floor(startRow),
-            (int) Mathf.Floor(startCol),
-            (playerLocationRow),
-            (playerLocationCol)
+            startRow,
+            startCol,
+            playerLocationRow,
+            playerLocationCol
         );
+        Vector2 f = new Vector2(path[path.Count - 1].getWorldX(), path[path.Count - 1].getWorldZ());
+        Debug.Log("The final goal is: " + f);
 
         if (path.Count > 0) {
             // Set the currentNodeLocation to be the first node to travel to from the set of path locations.

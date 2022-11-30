@@ -29,7 +29,6 @@ public class Character : MonoBehaviour
     {
         shootTimer = 0;
         walkTimer = 0;
-        canShoot = true;
         health = 100;
 
     }
@@ -136,8 +135,7 @@ public class Character : MonoBehaviour
                 GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
                 // set the timer value to start at the cooldown's seconds
                 shootTimer = canShootCoolDown;
-                // set the can shoot state to false so they can't shoot while on cooldown
-                canShoot = false;
+
             }
         }
     }
