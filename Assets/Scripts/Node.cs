@@ -14,7 +14,7 @@ public class Node {
 
     private Node parent;
 
-    public Node(int row, int col, float worldX, float worldZ, bool isPathable) {
+    public Node(int row, int col, float worldZ, float worldX, bool isPathable) {
         this.worldX = worldX;
         this.worldZ = worldZ;
         this.isPathable = isPathable;
