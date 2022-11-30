@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2774608016099196248}
   - component: {fileID: 7794088321167229178}
-  - component: {fileID: 3352711006785221008}
   - component: {fileID: 882344668158218464}
   - component: {fileID: 1964292855950136891}
   m_Layer: 0
@@ -87,27 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &3352711006785221008
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6336490549480612788}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!114 &882344668158218464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,13 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd9b749ec7104a43be7b071c87d5fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 3352711006785221008}
+  rb: {fileID: 0}
   hp: 100
   maxSpeed: 5
   minSpeed: 4
   standStillSeconds: 1
   playerDamage: 10
-  levelController: {fileID: 6929713917469617494, guid: 9bd01145396c6bf4981c9965182dc8ef, type: 3}
+  wd: {fileID: 0}
 --- !u!61 &1964292855950136891
 BoxCollider2D:
   m_ObjectHideFlags: 0

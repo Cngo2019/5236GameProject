@@ -125,14 +125,15 @@ public class EnemyMovement : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
 
         GameObject obj = collision.gameObject;
-
+        Debug.Log("something hit");
+        Debug.Log(obj.tag);
         if (obj.tag == "Bullet") {
             hp -= 50;
         }
 
         if (obj.tag == "Player" && GameObject.Find("Character") != null) {
             standStill = true;
-            rb.velocity = Vector2.zero;
+            //rb.velocity = Vector2.zero;
             timer = standStillSeconds;
             obj.GetComponent<Character>().reduceHealth(playerDamage);
         }

@@ -58,11 +58,12 @@ public class Character : MonoBehaviour
     }
 
     private bool isObstacle(Vector2 position) {
+        Vector2 charPosition = new Vector2(transform.position.x, transform.position.y);
         int layerMask = 1 << 8;
         Vector2 direction = position;
         direction.Normalize();
         direction *= 1f;
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, direction, direction.magnitude, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(charPosition, direction, direction.magnitude, layerMask);
         if (hit.collider) {
             if (hit.collider.gameObject.tag == "Obstacle") {
                 Debug.Log("hit an osbtacle");
@@ -70,7 +71,7 @@ public class Character : MonoBehaviour
             }
             
         }
-
+        walkTimer = walkCooldown * Time.deltaTime;
         return false;
     }
     /**
@@ -83,33 +84,33 @@ public class Character : MonoBehaviour
         
         if (walkTimer <= 0) {
             if (Input.GetKey(KeyCode.W)) {
-                Vector2 positionChange = new Vector2(0f, 1);
+                Vector3 positionChange = new Vector3(0f, 1, 0);
                 if (!isObstacle(positionChange)) {
-                    rb.MovePosition(rb.position + positionChange);
+                    transform.position = (transform.position + positionChange);
                 }
                 return;
             }
 
             if (Input.GetKey(KeyCode.S)) {
-                Vector2 positionChange = new Vector2(0f, -1f);
+                Vector3 positionChange = new Vector3(0f, -1f);
                 if (!isObstacle(positionChange)) {
-                    rb.MovePosition(rb.position + positionChange);
+                    transform.position = (transform.position + positionChange);
                 }
                 return;
             }
 
             if (Input.GetKey(KeyCode.A)) {
-                Vector2 positionChange = new Vector2(-1f , 0f);
+                Vector3 positionChange = new Vector3(-1f , 0f);
                 if (!isObstacle(positionChange)) {
-                    rb.MovePosition(rb.position + positionChange);
+                    transform.position = (transform.position + positionChange);
                 }
                 return;
             }
 
             if (Input.GetKey(KeyCode.D)) {
-                Vector2 positionChange = new Vector2(1, 0f);
+                Vector3 positionChange = new Vector3(1, 0f);
                 if (!isObstacle(positionChange)) {
-                    rb.MovePosition(rb.position + positionChange);
+                    transform.position = (transform.position + positionChange);
                 }
                 return;
             }
@@ -117,7 +118,6 @@ public class Character : MonoBehaviour
             walkTimer -= Time.deltaTime;
         }
 
-        rb.velocity = Vector2.zero;
         return;
     }
 
