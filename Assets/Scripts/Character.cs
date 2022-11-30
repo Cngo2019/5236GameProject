@@ -14,7 +14,12 @@ public class Character : MonoBehaviour
     [SerializeField] private float canShootCoolDown;
     
     [SerializeField] private bool canShoot;
-    [SerializeField] private float timer;
+    
+
+    [SerializeField] private float walkCooldown;
+    private float walkTimer;
+    private float shootTimer;
+
 
     private float health;
     
@@ -22,9 +27,11 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Start() 
     {
-        timer = 0;
+        shootTimer = 0;
+        walkTimer = 0;
         canShoot = true;
         health = 100;
+
     }
 
     // Update is called once per frame
@@ -51,7 +58,22 @@ public class Character : MonoBehaviour
         transform.right = mouseWorldPos - transform.position;
     }
 
+    private bool isObstacle(Vector2 position) {
+        int layerMask = 1 << 8;
+        Vector2 direction = position;
+        direction.Normalize();
+        direction *= 1f;
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, direction, direction.magnitude, layerMask);
+        if (hit.collider) {
+            if (hit.collider.gameObject.tag == "Obstacle") {
+                Debug.Log("hit an osbtacle");
+                return true;
+            }
+            
+        }
 
+        return false;
+    }
     /**
     In each statement, we:
     1. Record the basic WASD key inputs
@@ -60,28 +82,40 @@ public class Character : MonoBehaviour
     **/
     private void checkForMovementInput() {
         
-        if (Input.GetKey(KeyCode.W)) {
-            Vector2 positionChange = new Vector2(0f, movementSpeed);
-            rb.MovePosition(rb.position + positionChange);
-            return;
-        }
+        if (walkTimer <= 0) {
+            if (Input.GetKey(KeyCode.W)) {
+                Vector2 positionChange = new Vector2(0f, 1);
+                if (!isObstacle(positionChange)) {
+                    rb.MovePosition(rb.position + positionChange);
+                }
+                return;
+            }
 
-        if (Input.GetKey(KeyCode.S)) {
-           Vector2 positionChange = new Vector2(0f, movementSpeed * -1f);
-           rb.MovePosition(rb.position + positionChange);
-           return;
-        }
+            if (Input.GetKey(KeyCode.S)) {
+                Vector2 positionChange = new Vector2(0f, -1f);
+                if (!isObstacle(positionChange)) {
+                    rb.MovePosition(rb.position + positionChange);
+                }
+                return;
+            }
 
-        if (Input.GetKey(KeyCode.A)) {
-            Vector2 positionChange = new Vector2(movementSpeed * -1f , 0f);
-            rb.MovePosition(rb.position + positionChange);
-            return;
-        }
+            if (Input.GetKey(KeyCode.A)) {
+                Vector2 positionChange = new Vector2(-1f , 0f);
+                if (!isObstacle(positionChange)) {
+                    rb.MovePosition(rb.position + positionChange);
+                }
+                return;
+            }
 
-        if (Input.GetKey(KeyCode.D)) {
-            Vector2 positionChange = new Vector2(movementSpeed, 0f);
-            rb.MovePosition(rb.position + positionChange);
-            return;
+            if (Input.GetKey(KeyCode.D)) {
+                Vector2 positionChange = new Vector2(1, 0f);
+                if (!isObstacle(positionChange)) {
+                    rb.MovePosition(rb.position + positionChange);
+                }
+                return;
+            }
+        } else {
+            walkTimer -= Time.deltaTime;
         }
 
         rb.velocity = Vector2.zero;
@@ -90,21 +124,21 @@ public class Character : MonoBehaviour
 
     private void checkForFiringInput() {
 
-        // If player presses space bar and is able to shoot
-        if (Input.GetKey(KeyCode.Space) && canShoot) {
-            // Create a bullet on top of the player
-            GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
-            // set the timer value to start at the cooldown's seconds
-            timer = canShootCoolDown;
-            // set the can shoot state to false so they can't shoot while on cooldown
-            canShoot = false;
-        }
+        
 
         // If timer is greater than zero then subtract it down. otherwise this means we can shoot again.
-        if (timer >= 0) {
-            timer -= Time.deltaTime;
+        if (shootTimer >= 0) {
+            shootTimer -= Time.deltaTime;
         } else {
-            canShoot = true;
+            // If player presses space bar and is able to shoot
+            if (Input.GetKey(KeyCode.Space)) {
+                // Create a bullet on top of the player
+                GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
+                // set the timer value to start at the cooldown's seconds
+                shootTimer = canShootCoolDown;
+                // set the can shoot state to false so they can't shoot while on cooldown
+                canShoot = false;
+            }
         }
     }
 
