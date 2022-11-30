@@ -89,21 +89,21 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void computePath(GameObject player) {
-        Debug.Log("X, Y Enemy position is :"  + transform.position);
+        //Debug.Log("X, Y Enemy position is :"  + transform.position);
         int startRow = (int) (transform.position.y + 6 - .5f);
         int startCol = (int) (transform.position.x + 11 - .5f);
-        Debug.Log("Y This has been mapped to :"  + wd.getWorldData()[startRow, startCol].getWorldZ());
-        Debug.Log("X This has been mapped to :"  + wd.getWorldData()[startRow, startCol].getWorldX());
+        //Debug.Log("Y This has been mapped to :"  + wd.getWorldData()[startRow, startCol].getWorldZ());
+        //Debug.Log("X This has been mapped to :"  + wd.getWorldData()[startRow, startCol].getWorldX());
 
         int playerLocationRow = (int) (player.transform.position.y + 6 -.5f);
         int playerLocationCol = (int) (player.transform.position.x + 11 - .5f);
-        Debug.Log("Player row number: " + playerLocationRow);
-        Debug.Log("Player col number: " + playerLocationCol);
+        //Debug.Log("Player row number: " + playerLocationRow);
+        //Debug.Log("Player col number: " + playerLocationCol);
 
-        Debug.Log("player position: " + player.transform.position);
+       // Debug.Log("player position: " + player.transform.position);
 
-        Debug.Log("Player world Y position: " + wd.getWorldData()[playerLocationRow, playerLocationCol].getWorldZ());
-        Debug.Log("Player world X position: " + wd.getWorldData()[playerLocationRow, playerLocationCol].getWorldX());
+        // Debug.Log("Player world Y position: " + wd.getWorldData()[playerLocationRow, playerLocationCol].getWorldZ());
+        // Debug.Log("Player world X position: " + wd.getWorldData()[playerLocationRow, playerLocationCol].getWorldX());
         
 
         path = PathFinding.generatePath(
