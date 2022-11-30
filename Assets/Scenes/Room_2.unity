@@ -337,7 +337,7 @@ MonoBehaviour:
   bullet: {fileID: 8179823201529129097, guid: 8977fb1029986d947a7fd5b49adb4fd8, type: 3}
   canShootCoolDown: 0.25
   canShoot: 1
-  walkCooldown: 2
+  walkCooldown: 25
 --- !u!1 &1919791259
 GameObject:
   m_ObjectHideFlags: 0

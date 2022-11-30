@@ -73,7 +73,6 @@ public class EnemyMovement : MonoBehaviour
                 //Debug.Log(currentNodeLocation);
                 // Then go to the next node in the path list
                 currentNodeLocation = new Vector2(path[0].getWorldX(), path[0].getWorldZ());
-                Debug.Log(currentNodeLocation);
                 path.RemoveAt(0);
             }
 
@@ -114,7 +113,6 @@ public class EnemyMovement : MonoBehaviour
             playerLocationCol
         );
         Vector2 f = new Vector2(path[path.Count - 1].getWorldX(), path[path.Count - 1].getWorldZ());
-        Debug.Log("The final goal is: " + f);
 
         if (path.Count > 0) {
             // Set the currentNodeLocation to be the first node to travel to from the set of path locations.
@@ -122,20 +120,13 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
+    void OnTriggerEnter2D(Collider2D collision) {
 
         GameObject obj = collision.gameObject;
-        Debug.Log("something hit");
+
         Debug.Log(obj.tag);
         if (obj.tag == "Bullet") {
             hp -= 50;
-        }
-
-        if (obj.tag == "Player" && GameObject.Find("Character") != null) {
-            standStill = true;
-            //rb.velocity = Vector2.zero;
-            timer = standStillSeconds;
-            obj.GetComponent<Character>().reduceHealth(playerDamage);
         }
 
     }

@@ -66,7 +66,7 @@ public class Character : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(charPosition, direction, direction.magnitude, layerMask);
         if (hit.collider) {
             if (hit.collider.gameObject.tag == "Obstacle") {
-                Debug.Log("hit an osbtacle");
+                //Debug.Log("hit an osbtacle");
                 return true;
             }
             
@@ -150,13 +150,14 @@ public class Character : MonoBehaviour
         transform.position = new Vector2(charPosition.x, charPosition.y);
     }
 
-        void OnCollisionEnter2D(Collision2D collision) {
-            GameObject obj = collision.gameObject;
+    void OnTriggerEnter2D(Collider2D collision) {
+        GameObject obj = collision.gameObject;
 
-            if (obj.tag == "Enemy") {
-                health -= 2;
-            }
+        if (obj.tag == "Enemy") {
+            Debug.Log("ayu");
+            health -= 2;
         }
+    }
 
     public void reduceHealth(float amount) {
         this.health = health - amount;

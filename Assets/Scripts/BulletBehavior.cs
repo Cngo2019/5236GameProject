@@ -36,7 +36,7 @@ public class BulletBehavior : MonoBehaviour
         transform.position.y < cameraHorizontalBoundary * -1;
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
+    void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Obstacle") {
             GameObject.Destroy(gameObject);
         }
