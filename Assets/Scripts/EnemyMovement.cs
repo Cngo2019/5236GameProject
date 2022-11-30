@@ -6,13 +6,13 @@ public class EnemyMovement : MonoBehaviour
 
 {
 
-    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float hp;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float minSpeed;
+    [SerializeField] private float speed;
     [SerializeField] private float standStillSeconds;
     [SerializeField] private float playerDamage;
     [SerializeField] private WorldDecomposer wd;
+    
+    private float computeTimer;
 
     private List<Node> path;
     private Vector2 currentNodeLocation;
@@ -27,21 +27,13 @@ public class EnemyMovement : MonoBehaviour
         standStill = false;
         levelController = GameObject.Find("LevelController");
         path = new List<Node>();
+        computeTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("up") && !flag) {
-            // This will be replaced with A star soon
-            Vector2 charPosition = GameObject.Find("Character").transform.position;
-            computePath(GameObject.Find("Character"));
-            flag = true;
-        }
-
-        if (flag) {
-            chaseCharacter();
-        }
+        handleMovement();
 
         if (standStill) {
             if (timer >= 0) {
@@ -63,10 +55,20 @@ public class EnemyMovement : MonoBehaviour
         
     }
 
-    private void chaseCharacter() {
-        //Vector2 velocityOutput = KinematicArrive.getSteering(transform.position, charPosition, maxSpeed, maxSpeed);
-        //rb.velocity = velocityOutput;
+    private void handleMovement() {
+        if (GameObject.Find("Character")) {
+            if (computeTimer <= 0) {
+                Vector2 charPosition = GameObject.Find("Character").transform.position;
+                computePath(GameObject.Find("Character"));
+                computeTimer = 160 * Time.deltaTime;
+            } else {
+                computeTimer -= Time.deltaTime;
+            } 
+        }
 
+        chaseCharacter();
+    }
+    private void chaseCharacter() {
          if (path.Count > 0) {
             // If our leader is already at the current node location then move on to the next location in the path list
             if (Mathf.Approximately(transform.position.magnitude, currentNodeLocation.magnitude)) {
@@ -77,7 +79,7 @@ public class EnemyMovement : MonoBehaviour
             }
 
             // Just continue lerping to our current target location.
-            transform.position = Vector2.Lerp(transform.position, currentNodeLocation, 120f * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, currentNodeLocation, 1);
            // Debug.Log("Curr position " + currentNodeLocation);
 
         } else {
@@ -88,21 +90,11 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void computePath(GameObject player) {
-        //Debug.Log("X, Y Enemy position is :"  + transform.position);
         int startRow = (int) (transform.position.y + 6 - .5f);
         int startCol = (int) (transform.position.x + 11 - .5f);
-        //Debug.Log("Y This has been mapped to :"  + wd.getWorldData()[startRow, startCol].getWorldZ());
-        //Debug.Log("X This has been mapped to :"  + wd.getWorldData()[startRow, startCol].getWorldX());
 
         int playerLocationRow = (int) (player.transform.position.y + 6 -.5f);
         int playerLocationCol = (int) (player.transform.position.x + 11 - .5f);
-        //Debug.Log("Player row number: " + playerLocationRow);
-        //Debug.Log("Player col number: " + playerLocationCol);
-
-       // Debug.Log("player position: " + player.transform.position);
-
-        // Debug.Log("Player world Y position: " + wd.getWorldData()[playerLocationRow, playerLocationCol].getWorldZ());
-        // Debug.Log("Player world X position: " + wd.getWorldData()[playerLocationRow, playerLocationCol].getWorldX());
         
 
         path = PathFinding.generatePath(
