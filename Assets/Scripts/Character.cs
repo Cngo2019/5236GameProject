@@ -152,9 +152,8 @@ public class Character : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision) {
         GameObject obj = collision.gameObject;
-
+        Debug.Log("enemy has bit me!");
         if (obj.tag == "Enemy") {
-            Debug.Log("ayu");
             health -= 2;
         }
     }
