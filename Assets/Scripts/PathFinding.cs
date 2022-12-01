@@ -11,7 +11,7 @@ public static class PathFinding
     
         // start row is Z
         // start col is X
-        Debug.Log(startRow + " "  + startCol);
+        //Debug.Log(startRow + " "  + startCol);
         Node current = grid[startRow, startCol];
         if (!grid[goalRow, goalCol].getIsPathable()) {
             Debug.Log("The position is not pathable");
