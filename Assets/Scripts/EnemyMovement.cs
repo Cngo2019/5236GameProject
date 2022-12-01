@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -45,7 +46,12 @@ public class EnemyMovement : MonoBehaviour
     
         if (standStillTimer <= 0) {
             if (character != null) {
-                handleMovement();
+                try {
+                    handleMovement();
+                } catch(Exception e) {
+                    Debug.Log(e);
+                }
+                
             }
         }
         else {
