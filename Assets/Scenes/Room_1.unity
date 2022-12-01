@@ -181,7 +181,7 @@ MonoBehaviour:
   bullet: {fileID: 8179823201529129097, guid: 8977fb1029986d947a7fd5b49adb4fd8, type: 3}
   canShootCoolDown: 0.25
   canShoot: 1
-  walkCooldown: 6
+  walkCooldown: 8
 --- !u!61 &11116832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -437,6 +437,7 @@ MonoBehaviour:
   spawnIntervalSec: 2
   enemy: {fileID: 9194740628994796157, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
   nextRoom: Room_2
+  wd: {fileID: 0}
   killRequirement: 10
 --- !u!4 &569581886
 Transform:

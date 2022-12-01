@@ -12,7 +12,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float playerDamage;
     [SerializeField] private WorldDecomposer wd;
 
+    [SerializeField] private float pathFindingTimer;
+
     private GameObject character;
+    private float standStillTimer;
 
     private Vector2 finalGoal;
     
@@ -22,33 +25,31 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 currentNodeLocation;
     GameObject levelController;
     bool standStill;
-    private float timer;
 
     // Start is called before the first frame update
     void Awake() {
         finalGoal = new Vector2();
-        standStill = false;
+        standStillTimer = 0;
         levelController = GameObject.Find("LevelController");
         path = new List<Node>();
         computeTimer = 0;
         wd = GameObject.Find("WorldDecomposer").GetComponent<WorldDecomposer>();
         character = GameObject.Find("Character");
-        Debug.Log("everything good");
     }
     // Update is called once per frame
     void Update()
     {
-        if (character != null) {
-            handleMovement();
-        }
+        
             
 
-        if (standStill) {
-            if (timer >= 0) {
-            timer -= Time.deltaTime;;
-            } else {
-                standStill = false;
+    
+        if (standStillTimer <= 0) {
+            if (character != null) {
+                handleMovement();
             }
+        }
+        else {
+            standStillTimer -= Time.deltaTime;
         }
 
 
@@ -66,7 +67,7 @@ public class EnemyMovement : MonoBehaviour
     private void handleMovement() {
         if (computeTimer <= 0) {
             computePath(character);
-            computeTimer = 360 * Time.deltaTime;
+            computeTimer = pathFindingTimer * Time.deltaTime;
         } else {
             chaseCharacter();
             computeTimer -= Time.deltaTime;
@@ -77,25 +78,21 @@ public class EnemyMovement : MonoBehaviour
          if (path.Count > 0) {
             // If our leader is already at the current node location then move on to the next location in the path list
             Vector2 c = new Vector2(transform.position.x, transform.position.y);
-            if (c.Equals(currentNodeLocation)) {
+            Vector2 ch = new Vector2(character.transform.position.x, character.transform.position.y);
+            if (c == currentNodeLocation) {
                 //Debug.Log(currentNodeLocation);
                 // Then go to the next node in the path list
                 currentNodeLocation = new Vector2(path[0].getWorldX(), path[0].getWorldZ());
                 path.RemoveAt(0);
             }
 
-
-            Debug.Log(Mathf.Abs((c - finalGoal).magnitude));
-            if (Mathf.Abs((c - finalGoal).magnitude) <= .9) {
+            if (Mathf.Abs((c - ch).magnitude) <= .99f) {
                 transform.position = finalGoal;
                 path = new List<Node>();
             } else {
                 // Just continue lerping to our current target location.
                 transform.position = Vector2.MoveTowards(c, currentNodeLocation, speed * Time.deltaTime);
-            }
-                  
-        } else {
-            computePath(character);
+            } 
         }
         
 
@@ -117,8 +114,8 @@ public class EnemyMovement : MonoBehaviour
             playerLocationCol
         );
 
-        finalGoal = new Vector2(path[path.Count - 1].getWorldX(), path[path.Count - 1].getWorldZ());
         if (path.Count > 0) {
+            finalGoal = new Vector2(path[path.Count - 1].getWorldX(), path[path.Count - 1].getWorldZ());
             // Set the currentNodeLocation to be the first node to travel to from the set of path locations.
             currentNodeLocation = new Vector2(path[0].getWorldX(), path[0].getWorldZ());
         }
@@ -131,6 +128,11 @@ public class EnemyMovement : MonoBehaviour
         Debug.Log(obj.tag);
         if (obj.tag == "Bullet") {
             hp -= 50;
+        }
+
+        if (obj.tag == "Player") {
+            Debug.Log("We bit the player");
+            standStillTimer = standStillSeconds * Time.deltaTime;
         }
 
     }

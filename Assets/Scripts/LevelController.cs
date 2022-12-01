@@ -43,12 +43,6 @@ public class LevelController : MonoBehaviour
         }
 
          if (killRequirement <= 0) {
-            /**
-            Display HUD option 285, 193
-            If they press a key then start the next level
-            **/
-            //player.GetComponent<Character>().decreaseShootCD();
-            //player.GetComponent<Character>().increaseMS();
             startNextLevel();
          }
     }
@@ -56,8 +50,8 @@ public class LevelController : MonoBehaviour
     private bool spawnEnemyZombie() {
 
         Node[,] worldData = wd.getWorldData();
-        int spawnCoordinateX = Random.Range(0, wd.getColNum());
-        int spawnCoordinateY = Random.Range(0, wd.getRowNum());
+        int spawnCoordinateX = Random.Range(0, wd.getColNum() - 1);
+        int spawnCoordinateY = Random.Range(0, wd.getRowNum() - 1);
 
         if (worldData[spawnCoordinateY, spawnCoordinateX].getIsPathable()) {
             
@@ -73,20 +67,6 @@ public class LevelController : MonoBehaviour
 
         return false;
             
-    }
-
-    private float randomizeSpawn(float boundaryCoordinate) {
-        int randInt = Random.Range(0, 2);
-        int spawnArea = Random.Range(0, 10);
-        if (randInt == 0) {
-            boundaryCoordinate = -1f * boundaryCoordinate;
-            boundaryCoordinate -= spawnArea * 1f;
-        }
-
-        boundaryCoordinate += spawnArea * 1f;
-
-        return boundaryCoordinate;
-
     }
 
     public void reduceKillCount() {

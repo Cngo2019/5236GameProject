@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: speed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4974656610065743597, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
+      propertyPath: pathFindingTimer
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 8603734742751808331, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
       propertyPath: m_RootOrder
       value: 0

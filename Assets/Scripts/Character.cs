@@ -122,8 +122,6 @@ public class Character : MonoBehaviour
 
     private void checkForFiringInput() {
 
-        
-
         // If timer is greater than zero then subtract it down. otherwise this means we can shoot again.
         if (shootTimer >= 0) {
             shootTimer -= Time.deltaTime;
@@ -143,15 +141,14 @@ public class Character : MonoBehaviour
         Vector2 charPosition = transform.position;
         float horizontalBoundary = CameraBoundary.getCameraHorizontalBoundary("MainCamera");
         float verticalBoundary = CameraBoundary.getCameraVerticalBoundary("MainCamera");
-        charPosition.x = Mathf.Clamp(charPosition.x, -horizontalBoundary + .25f, horizontalBoundary - .25f);
-        charPosition.y = Mathf.Clamp(charPosition.y, -verticalBoundary + .25f, verticalBoundary - .25f);
+        charPosition.x = Mathf.Clamp(charPosition.x, -horizontalBoundary + .5f, horizontalBoundary - .5f);
+        charPosition.y = Mathf.Clamp(charPosition.y, -verticalBoundary + .5f, verticalBoundary - .5f);
 
         transform.position = new Vector2(charPosition.x, charPosition.y);
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
         GameObject obj = collision.gameObject;
-        Debug.Log("enemy has bit me!");
         if (obj.tag == "Enemy") {
             health -= 2;
         }

@@ -14,7 +14,6 @@ public static class PathFinding
         //Debug.Log(startRow + " "  + startCol);
         Node current = grid[startRow, startCol];
         if (!grid[goalRow, goalCol].getIsPathable()) {
-            Debug.Log("The position is not pathable");
             return new List<Node>();
         }
         List<Node> openList = new List<Node>();
@@ -31,7 +30,6 @@ public static class PathFinding
 
             if (openList.Count <= 0) {
                 // Indicates that there is no path in this point
-                Debug.Log("The position is not pathable");
                 return new List<Node>();
             }
             current = openList[getLowestIndex(openList)];
@@ -132,7 +130,6 @@ public static class PathFinding
         List<Node> path = new List<Node>();
         while(current != null) {
             if (!current.getIsPathable()) {
-                Debug.Log("ERROR!");
             }
             path.Add(current);
             current = current.getParent();
