@@ -436,7 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnIntervalSec: 1
   enemy: {fileID: 8832998042184276279, guid: 50221c1b46b6a1b43932314766c36c5d, type: 3}
-  nextRoom: Room_3
+  nextRoom: Room_2
   wd: {fileID: 171974884}
   killRequirement: 20
 --- !u!4 &569581886

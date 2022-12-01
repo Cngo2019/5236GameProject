@@ -39,7 +39,7 @@ public class Character : MonoBehaviour
         rotateCharacterTowardsMouse();
         checkForMovementInput();
         checkForFiringInput();
-        //clampPlayer();
+        clampPlayer();
 
         if (health <= 0) {
             SceneManager.LoadScene("DeadMenu");
