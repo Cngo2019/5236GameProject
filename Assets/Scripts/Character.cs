@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
     [SerializeField] private Camera gameCamera;
     [SerializeField] private Rigidbody2D rb;
 
-    [SerializeField] private float movementSpeed;
+    
     [SerializeField] private GameObject bullet;
     [SerializeField] private float canShootCoolDown;
     
@@ -42,7 +42,6 @@ public class Character : MonoBehaviour
         //clampPlayer();
 
         if (health <= 0) {
-            GameObject.Destroy(gameObject);
             SceneManager.LoadScene("DeadMenu");
         }
 
@@ -164,13 +163,5 @@ public class Character : MonoBehaviour
 
     public void setHealth(float health) {
         this.health = health;
-    }
-
-    public void increaseMS() {
-        this.movementSpeed += .05f;
-    }
-
-    public void decreaseShootCD() {
-        this.canShootCoolDown -= .15f;
     }
 }

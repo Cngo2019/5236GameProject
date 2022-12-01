@@ -12,6 +12,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float playerDamage;
     [SerializeField] private WorldDecomposer wd;
 
+    private GameObject character;
+
     private Vector2 finalGoal;
     
     private float computeTimer;
@@ -21,24 +23,25 @@ public class EnemyMovement : MonoBehaviour
     GameObject levelController;
     bool standStill;
     private float timer;
-    bool flag;
-    GameObject character;
+
     // Start is called before the first frame update
-    void Start()
-    {
+    void Awake() {
         finalGoal = new Vector2();
-        flag = false;
         standStill = false;
         levelController = GameObject.Find("LevelController");
         path = new List<Node>();
         computeTimer = 0;
-        character= GameObject.Find("Character");
+        wd = GameObject.Find("WorldDecomposer").GetComponent<WorldDecomposer>();
+        character = GameObject.Find("Character");
+        Debug.Log("everything good");
     }
-
     // Update is called once per frame
     void Update()
     {
-        handleMovement();
+        if (character != null) {
+            handleMovement();
+        }
+            
 
         if (standStill) {
             if (timer >= 0) {
@@ -49,14 +52,14 @@ public class EnemyMovement : MonoBehaviour
         }
 
 
-        //  if (hp <= 0) {
-        //     levelController.GetComponent<LevelController>().reduceKillCount();
-        //     GameObject.Destroy(gameObject);
-        // }
+         if (hp <= 0) {
+            levelController.GetComponent<LevelController>().reduceKillCount();
+            GameObject.Destroy(gameObject);
+        }
         
-        // if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
-        //     GameObject.Destroy(gameObject);
-        // }
+        if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
+            GameObject.Destroy(gameObject);
+        }
         
     }
 

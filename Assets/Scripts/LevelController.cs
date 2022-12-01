@@ -11,6 +11,9 @@ public class LevelController : MonoBehaviour
 
     [SerializeField] string nextRoom;
 
+    [SerializeField] private WorldDecomposer wd;
+
+
     private GameObject player;
     
     [SerializeField] private float killRequirement;
@@ -22,6 +25,7 @@ public class LevelController : MonoBehaviour
     {
         spawnTimer = spawnIntervalSec;
         player = GameObject.Find("Character");
+        wd = GameObject.Find("WorldDecomposer").GetComponent<WorldDecomposer>();
 
     }
 
@@ -31,12 +35,12 @@ public class LevelController : MonoBehaviour
         if (spawnTimer >= 0) {
              spawnTimer -= Time.deltaTime;
          } else {
-            //spawn enemy outside of camera view
-            if (killRequirement > 0)
-                spawnEnemyZombie();
-           // reset spawn timer
-            spawnTimer = spawnIntervalSec;
-         }
+            // If we successfuly spawn a zombie reset the timer.
+            if (spawnEnemyZombie()) {
+                spawnTimer = spawnIntervalSec;
+            }
+                    
+        }
 
          if (killRequirement <= 0) {
             /**
@@ -49,19 +53,26 @@ public class LevelController : MonoBehaviour
          }
     }
 
-    private void spawnEnemyZombie() {
-        float cameraHorizontalBoundary = CameraBoundary.getCameraHorizontalBoundary("MainCamera");
-        float cameraVerticalBoundary = CameraBoundary.getCameraVerticalBoundary("MainCamera");
+    private bool spawnEnemyZombie() {
 
-        float spawnCoordinateX = randomizeSpawn(cameraHorizontalBoundary);
-        float spawnCoordinateY = randomizeSpawn(cameraVerticalBoundary);
+        Node[,] worldData = wd.getWorldData();
+        int spawnCoordinateX = Random.Range(0, wd.getColNum());
+        int spawnCoordinateY = Random.Range(0, wd.getRowNum());
 
-        GameObject zombieInstance = Instantiate(
-                enemy,
-                new Vector3(spawnCoordinateX, spawnCoordinateY, 0f),
-                Quaternion.identity
+        if (worldData[spawnCoordinateY, spawnCoordinateX].getIsPathable()) {
+            
+            GameObject zombieInstance = Instantiate(
+                    enemy,
+                    new Vector3(
+                        worldData[spawnCoordinateY, spawnCoordinateX].getWorldX(), worldData[spawnCoordinateY, spawnCoordinateX].getWorldZ(), 0f)
+                    ,
+                    Quaternion.identity
             );
-        
+            return true;
+        }
+
+        return false;
+            
     }
 
     private float randomizeSpawn(float boundaryCoordinate) {

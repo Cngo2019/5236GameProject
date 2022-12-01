@@ -35,9 +35,13 @@ public class WorldDecomposer : MonoBehaviour {
 		DecomposeWorld();
 	}
 
-    void Update() {
-       
-    }
+    public int getRowNum() {
+		return rows;
+	}
+
+	public int getColNum() {
+		return cols;
+	}
 
 	public void DecomposeWorld () {
 
