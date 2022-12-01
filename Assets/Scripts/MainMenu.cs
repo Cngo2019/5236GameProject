@@ -9,6 +9,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Room_1");
     }
 
+    public void loadInstructions() {
+        SceneManager.LoadScene("Instructions");
+    }
+
     public void LoadStartMenu() {
         SceneManager.LoadScene("Start");
     }
