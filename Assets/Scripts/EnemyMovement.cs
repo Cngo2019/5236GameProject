@@ -61,7 +61,14 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void handleMovement() {
-        chaseCharacter();
+        if (computeTimer <= 0) {
+            computePath(character);
+            computeTimer = 360 * Time.deltaTime;
+        } else {
+            chaseCharacter();
+            computeTimer -= Time.deltaTime;
+        }
+        
     }
     private void chaseCharacter() {
          if (path.Count > 0) {
@@ -76,7 +83,7 @@ public class EnemyMovement : MonoBehaviour
 
 
             Debug.Log(Mathf.Abs((c - finalGoal).magnitude));
-            if (Mathf.Abs((c - finalGoal).magnitude) <= .5) {
+            if (Mathf.Abs((c - finalGoal).magnitude) <= .9) {
                 transform.position = finalGoal;
                 path = new List<Node>();
             } else {
