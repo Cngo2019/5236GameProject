@@ -181,7 +181,7 @@ MonoBehaviour:
   bullet: {fileID: 8179823201529129097, guid: 8977fb1029986d947a7fd5b49adb4fd8, type: 3}
   canShootCoolDown: 0.25
   canShoot: 1
-  walkCooldown: 6
+  walkCooldown: 16
 --- !u!61 &11116832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -434,11 +434,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f4002bda76fa44da8682482b05f49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIntervalSec: 1
+  spawnIntervalSec: 0.5
   enemy: {fileID: 8832998042184276279, guid: 50221c1b46b6a1b43932314766c36c5d, type: 3}
   nextRoom: Win
   wd: {fileID: 171974884}
-  killRequirement: 30
+  killRequirement: 50
 --- !u!4 &569581886
 Transform:
   m_ObjectHideFlags: 0
