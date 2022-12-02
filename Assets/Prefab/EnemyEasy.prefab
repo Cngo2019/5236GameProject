@@ -102,7 +102,7 @@ MonoBehaviour:
   standStillSeconds: 120
   playerDamage: 10
   wd: {fileID: 0}
-  pathFindingTimer: 360
+  pathFindingTime: 270
   t: 2
 --- !u!61 &3424244042853392299
 BoxCollider2D:

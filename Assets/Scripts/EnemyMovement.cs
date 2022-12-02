@@ -51,41 +51,34 @@ public class EnemyMovement : MonoBehaviour
         }
 
 
-        //  if (hp <= 0) {
-        //     levelController.GetComponent<LevelController>().reduceKillCount();
-        //     GameObject.Destroy(gameObject);
-        // }
+         if (hp <= 0) {
+            levelController.GetComponent<LevelController>().reduceKillCount();
+            GameObject.Destroy(gameObject);
+        }
         
-        // if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
-        //     GameObject.Destroy(gameObject);
-        // }
+        if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
+            GameObject.Destroy(gameObject);
+        }
         
     }
 
     private void handleMovement() {
-        if (computeTimer >= 0) {
-            chaseCharacter();
+        Debug.Log(path.Count);
+        if (computeTimer <= 0) {
+            computePath(character);
         }
         else {
-            computePath(character);
+            chaseCharacter();
         }
     }
     private void chaseCharacter() {
-         if (pathIndex < path.Count) {
-                Vector2 current = new Vector2(transform.position.x, transform.position.y);
-                if (Vector2.Distance(current, currentNodeLocation) <= .1f) {
-                    pathIndex++;
-                    if (pathIndex < path.Count)
-                        currentNodeLocation = new Vector2(path[pathIndex].getWorldX(), path[pathIndex].getWorldZ());
-                }
-                transform.position = Vector2.MoveTowards(transform.position, currentNodeLocation, t * Time.deltaTime);
-        } else {
-            computePath(character);
-            if (path.Count > 0) {
-                pathIndex = 0;
+        Vector2 current = new Vector2(transform.position.x, transform.position.y);
+        if (Vector2.Distance(current, currentNodeLocation) <= .1f) {
+            pathIndex++;
+            if (pathIndex < path.Count)
                 currentNodeLocation = new Vector2(path[pathIndex].getWorldX(), path[pathIndex].getWorldZ());
-            }
         }
+        transform.position = Vector2.MoveTowards(transform.position, currentNodeLocation, t * Time.deltaTime);
         computeTimer -= Time.deltaTime;
     }
 
@@ -108,7 +101,15 @@ public class EnemyMovement : MonoBehaviour
             playerLocationCol
         );
 
-        computeTimer = pathFindingTime * Time.deltaTime;
+        if (path.Count > 0) {
+            pathIndex = 0;
+            currentNodeLocation = new Vector2(path[pathIndex].getWorldX(), path[pathIndex].getWorldZ());
+            computeTimer = pathFindingTime * Time.deltaTime;
+        } else {
+            // Means I have spawned somewhere that is not pathable to player
+            GameObject.Destroy(gameObject);
+        }
+        
 
     }
 
