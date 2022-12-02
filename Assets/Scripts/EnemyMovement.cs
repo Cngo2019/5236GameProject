@@ -110,8 +110,6 @@ public class EnemyMovement : MonoBehaviour
         int playerLocationRow = (int) (player.transform.position.y + 6 -.5f);
         int playerLocationCol = (int) (player.transform.position.x + 11 - .5f);
         
-        Debug.Log(playerLocationRow + " " + playerLocationCol);
-
         path = PathFinding.generatePath(
             wd.getWorldData(),
             startRow,
@@ -135,11 +133,25 @@ public class EnemyMovement : MonoBehaviour
         if (obj.tag == "Bullet") {
             hp -= 50;
         }
+    }
 
+    void OnTriggerStay2D(Collider2D collision) {
+        GameObject obj = collision.gameObject;
         if (obj.tag == "Player") {
-            Debug.Log("We bit the player");
-            standStillTimer = standStillSeconds * Time.deltaTime;
+            if (standStillTimer <= 0) {
+                standStillTimer = standStillSeconds * Time.deltaTime;
+                obj.GetComponent<Character>().reduceHealth(2f);
+            }
+            return;
         }
+    }
+
+    public bool enemyCanDamagePlayer() {
+        if (standStillTimer <= 0) {
+            return true;
+        }
+
+        return false;
 
     }
 }

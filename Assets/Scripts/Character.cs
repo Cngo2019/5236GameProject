@@ -147,18 +147,16 @@ public class Character : MonoBehaviour
         transform.position = new Vector2(charPosition.x, charPosition.y);
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
-        GameObject obj = collision.gameObject;
-        if (obj.tag == "Enemy") {
-            health -= 2;
-        }
-    }
-
     public void reduceHealth(float amount) {
         this.health = health - amount;
     }
 
     public void setHealth(float health) {
         this.health = health;
+    }
+    
+
+    public float getHealth() {
+        return health;
     }
 }
