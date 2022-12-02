@@ -12,7 +12,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float playerDamage;
     [SerializeField] private WorldDecomposer wd;
 
-    [SerializeField] private float pathFindingTime;
+    [SerializeField] private float pathFindingTimer;
 
     [SerializeField] private float t;
 
@@ -63,12 +63,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void handleMovement() {
-        if (computeTimer > 0) {
-            chaseCharacter();
-            computeTimer -= Time.deltaTime;
-        } else {
-            computePath(character);
-        }
+        chaseCharacter();
     }
     private void chaseCharacter() {
          if (pathIndex < path.Count) {
@@ -106,8 +101,6 @@ public class EnemyMovement : MonoBehaviour
             playerLocationRow,
             playerLocationCol
         );
-
-        computeTimer = pathFindingTime * Time.deltaTime;
 
     }
 
