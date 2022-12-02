@@ -8,7 +8,6 @@ public class EnemyMovement : MonoBehaviour
 {
 
     [SerializeField] private float hp;
-    [SerializeField] private float speed;
     [SerializeField] private float standStillSeconds;
     [SerializeField] private float playerDamage;
     [SerializeField] private WorldDecomposer wd;
@@ -17,11 +16,8 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private float t;
 
-    private float moveTimer;
     private GameObject character;
     private float standStillTimer;
-
-    private Vector2 finalGoal;
     
     private float computeTimer;
 
@@ -32,8 +28,6 @@ public class EnemyMovement : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake() {
-        moveTimer = 0f;
-        finalGoal = new Vector2();
         standStillTimer = 0;
         levelController = GameObject.Find("LevelController");
         path = new List<Node>();
@@ -60,14 +54,14 @@ public class EnemyMovement : MonoBehaviour
         }
 
 
-        //  if (hp <= 0) {
-        //     levelController.GetComponent<LevelController>().reduceKillCount();
-        //     GameObject.Destroy(gameObject);
-        // }
+         if (hp <= 0) {
+            levelController.GetComponent<LevelController>().reduceKillCount();
+            GameObject.Destroy(gameObject);
+        }
         
-        // if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
-        //     GameObject.Destroy(gameObject);
-        // }
+        if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
+            GameObject.Destroy(gameObject);
+        }
         
     }
 
@@ -83,30 +77,21 @@ public class EnemyMovement : MonoBehaviour
     }
     private void chaseCharacter() {
          if (path.Count > 0) {
-            if (moveTimer <= 0) {
                 Vector2 current = new Vector2(transform.position.x, transform.position.y);
                 if (current.Equals(currentNodeLocation)) {
                     // Just continue lerping to our current target location.
                     path.RemoveAt(0);
                     currentNodeLocation = new Vector2(path[0].getWorldX(), path[0].getWorldZ());
-                    transform.position = currentNodeLocation;
+                    //transform.position = currentNodeLocation;
                 }
-                
-                moveTimer =  t * Time.deltaTime;
-            } else {
-                moveTimer -= Time.deltaTime;
-            }
+                transform.position = Vector2.MoveTowards(transform.position, currentNodeLocation, t * Time.deltaTime);
                 
         } else {
             computePath(character);
         }
     }
 
-    private void moveToNextNode() {
-        
-        
 
-    }
     private void computePath(GameObject player) {
         int startRow = (int) (transform.position.y + 6 - .5f);
         int startCol = (int) (transform.position.x + 11 - .5f);

@@ -99,11 +99,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  speed: 3
   standStillSeconds: 120
   playerDamage: 10
   wd: {fileID: 0}
   pathFindingTimer: 360
+  t: 2
 --- !u!61 &3424244042853392299
 BoxCollider2D:
   m_ObjectHideFlags: 0
