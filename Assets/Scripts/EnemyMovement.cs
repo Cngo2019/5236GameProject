@@ -41,9 +41,6 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         
-            
-
-    
         if (standStillTimer <= 0) {
             if (character != null) {
                 try {
@@ -99,6 +96,8 @@ public class EnemyMovement : MonoBehaviour
                 // Just continue lerping to our current target location.
                 transform.position = Vector2.MoveTowards(c, currentNodeLocation, speed * Time.deltaTime);
             } 
+        } else {
+            computePath(character);
         }
         
 
@@ -111,6 +110,7 @@ public class EnemyMovement : MonoBehaviour
         int playerLocationRow = (int) (player.transform.position.y + 6 -.5f);
         int playerLocationCol = (int) (player.transform.position.x + 11 - .5f);
         
+        Debug.Log(playerLocationRow + " " + playerLocationCol);
 
         path = PathFinding.generatePath(
             wd.getWorldData(),

@@ -77,45 +77,39 @@ public class WorldDecomposer : MonoBehaviour {
 
 	}
 
-
+	/**
+	* For this method, we randomly generate walls based on the level. Level 1 does not contain
+	any walls at all.
+	For level 2 and 3, we generate walls randomly.
+	**/
 	public List<Vector2> generateWalls() {
-		List<Vector2> blockedCoords;
-		if (currentLevel == 2) {
-			blockedCoords = new List<Vector2> {
-				new Vector2(7, 4),
-				new Vector2(7, 5),
-				new Vector2(7, 6),
-				new Vector2(7, 7),
-				new Vector2(7, 8),
+		switch(currentLevel) {
+			case 1:
+			    return randomlyGenerateWalls(.1f);
+			case 2:
+				return randomlyGenerateWalls(.25f);
+			default:
+				return randomlyGenerateWalls(.35f);
+		}
+		
+	}
 
-				new Vector2(7, 1),
-				new Vector2(8, 1),
-				new Vector2(9, 1),
-				new Vector2(10, 1),
-				new Vector2(11, 1),
+	private List<Vector2> randomlyGenerateWalls(float threshold) {
+		List<Vector2> obstacleCoords = new List<Vector2>();
+		for(int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				float randomRange = Random.value;
+				Debug.Log("random int " + randomRange);
 
-				new Vector2(7, 9),
-				new Vector2(8, 9),
-				new Vector2(9, 9),
-				new Vector2(10, 9),
-				new Vector2(11, 9),
+				// 7 and 16 is the player's starting position
+				if (randomRange < threshold && i != 7 && j != 16) {
+					obstacleCoords.Add(new Vector2(j, i));
+				}
 
-				new Vector2(13, 4),
-				new Vector2(13, 5),
-				new Vector2(13, 6),
-				new Vector2(13, 7),
-				new Vector2(13, 8),
-
-
-				
-			};
-			
-		} else {
-			blockedCoords = new List<Vector2> {};
+			}
 		}
 
-		return blockedCoords;
-	} 
-	
+		return obstacleCoords;
+	}
 
 }
