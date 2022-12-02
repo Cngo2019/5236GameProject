@@ -15,6 +15,9 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private float pathFindingTimer;
 
+    [SerializeField] private float t;
+
+    private float moveTimer;
     private GameObject character;
     private float standStillTimer;
 
@@ -29,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake() {
+        moveTimer = 0f;
         finalGoal = new Vector2();
         standStillTimer = 0;
         levelController = GameObject.Find("LevelController");
@@ -56,14 +60,14 @@ public class EnemyMovement : MonoBehaviour
         }
 
 
-         if (hp <= 0) {
-            levelController.GetComponent<LevelController>().reduceKillCount();
-            GameObject.Destroy(gameObject);
-        }
+        //  if (hp <= 0) {
+        //     levelController.GetComponent<LevelController>().reduceKillCount();
+        //     GameObject.Destroy(gameObject);
+        // }
         
-        if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
-            GameObject.Destroy(gameObject);
-        }
+        // if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
+        //     GameObject.Destroy(gameObject);
+        // }
         
     }
 
@@ -79,30 +83,30 @@ public class EnemyMovement : MonoBehaviour
     }
     private void chaseCharacter() {
          if (path.Count > 0) {
-            // If our leader is already at the current node location then move on to the next location in the path list
-            Vector2 c = new Vector2(transform.position.x, transform.position.y);
-            Vector2 ch = new Vector2(character.transform.position.x, character.transform.position.y);
-            if (c == currentNodeLocation) {
-                //Debug.Log(currentNodeLocation);
-                // Then go to the next node in the path list
-                currentNodeLocation = new Vector2(path[0].getWorldX(), path[0].getWorldZ());
-                path.RemoveAt(0);
-            }
-
-            if (Mathf.Abs((c - ch).magnitude) <= 1f) {
-                transform.position = finalGoal;
-                path = new List<Node>();
+            if (moveTimer <= 0) {
+                Vector2 current = new Vector2(transform.position.x, transform.position.y);
+                if (current.Equals(currentNodeLocation)) {
+                    // Just continue lerping to our current target location.
+                    path.RemoveAt(0);
+                    currentNodeLocation = new Vector2(path[0].getWorldX(), path[0].getWorldZ());
+                    transform.position = currentNodeLocation;
+                }
+                
+                moveTimer =  t * Time.deltaTime;
             } else {
-                // Just continue lerping to our current target location.
-                transform.position = Vector2.MoveTowards(c, currentNodeLocation, speed * Time.deltaTime);
-            } 
+                moveTimer -= Time.deltaTime;
+            }
+                
         } else {
             computePath(character);
         }
+    }
+
+    private void moveToNextNode() {
+        
         
 
     }
-
     private void computePath(GameObject player) {
         int startRow = (int) (transform.position.y + 6 - .5f);
         int startCol = (int) (transform.position.x + 11 - .5f);
@@ -119,8 +123,6 @@ public class EnemyMovement : MonoBehaviour
         );
 
         if (path.Count > 0) {
-            finalGoal = new Vector2(path[path.Count - 1].getWorldX(), path[path.Count - 1].getWorldZ());
-            // Set the currentNodeLocation to be the first node to travel to from the set of path locations.
             currentNodeLocation = new Vector2(path[0].getWorldX(), path[0].getWorldZ());
         }
     }
