@@ -89,7 +89,7 @@ public class EnemyMovement : MonoBehaviour
                 path.RemoveAt(0);
             }
 
-            if (Mathf.Abs((c - ch).magnitude) <= .99f) {
+            if (Mathf.Abs((c - ch).magnitude) <= 1f) {
                 transform.position = finalGoal;
                 path = new List<Node>();
             } else {
