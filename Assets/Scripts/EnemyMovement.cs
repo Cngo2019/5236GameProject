@@ -139,7 +139,7 @@ public class EnemyMovement : MonoBehaviour
         if (obj.tag == "Player") {
             if (standStillTimer <= 0) {
                 standStillTimer = standStillSeconds * Time.deltaTime;
-                obj.GetComponent<Character>().reduceHealth(2f);
+                obj.GetComponent<Character>().reduceHealth(5f);
             }
             return;
         }
