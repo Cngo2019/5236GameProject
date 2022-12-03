@@ -7,19 +7,19 @@ using TMPro;
 public class PlayerStats : MonoBehaviour
 {
 
-    TextMeshProUGUI Health;
+    [SerializeField] TextMeshProUGUI stats;
     GameObject character;
     // Start is called before the first frame update
     void Start()
     {
-        Health = GetComponent<TextMeshProUGUI>();
+        stats = GetComponent<TextMeshProUGUI>();
         character = GameObject.Find("Character");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Health.text = character.GetComponent<Character>().getHealth().ToString();
-        Health.color = Color.red;
+        stats.text = "Health: " + character.GetComponent<Character>().getHealth().ToString() + "\n" + "Ammo: " + character.GetComponent<Character>().getAmmo().ToString();
+        stats.color = Color.red;
     }
 }

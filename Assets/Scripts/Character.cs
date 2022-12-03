@@ -17,11 +17,13 @@ public class Character : MonoBehaviour
     
 
     [SerializeField] private float walkCooldown;
-    private float walkTimer;
-    private float shootTimer;
+    [SerializeField] private float walkTimer;
+    [SerializeField] private float shootTimer;
+
+    [SerializeField] private float ammo;
 
 
-    private float health;
+    [SerializeField] private float health;
     
 
     // Start is called before the first frame update
@@ -30,6 +32,7 @@ public class Character : MonoBehaviour
         shootTimer = 0;
         walkTimer = 0;
         health = 100;
+        ammo = 50;
 
     }
 
@@ -127,12 +130,12 @@ public class Character : MonoBehaviour
             shootTimer -= Time.deltaTime;
         } else {
             // If player presses space bar and is able to shoot
-            if (Input.GetKey(KeyCode.Space)) {
+            if (Input.GetKey(KeyCode.Space) && ammo > 0) {
                 // Create a bullet on top of the player
                 GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.identity);
+                ammo -= 1;
                 // set the timer value to start at the cooldown's seconds
                 shootTimer = canShootCoolDown;
-
             }
         }
     }
@@ -158,5 +161,13 @@ public class Character : MonoBehaviour
 
     public float getHealth() {
         return health;
+    }
+
+    public float getAmmo() {
+        return ammo;
+    }
+
+    public void addAmmo() {
+        this.ammo += 5;
     }
 }
