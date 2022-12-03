@@ -59,7 +59,7 @@ public class WorldDecomposer : MonoBehaviour {
 
 				
 
-				//Debug.Log("row, col " + row + " " + col + " has been mapped to" + y +" " + x);
+				Debug.Log("row, col " + row + " " + col + " has been mapped to" + y +" " + x);
 				worldData [row, col] = new Node(row, col, y, x, true);
 			}
 		}

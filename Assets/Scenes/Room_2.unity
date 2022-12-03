@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnIntervalSec: 1
-  enemy: {fileID: 8832998042184276279, guid: 50221c1b46b6a1b43932314766c36c5d, type: 3}
+  enemy: {fileID: 6203770755450509400, guid: fc6f4e41131e47e4cbf354bfe8e992c4, type: 3}
   nextRoom: Room_3
   wd: {fileID: 171974884}
   killRequirement: 20

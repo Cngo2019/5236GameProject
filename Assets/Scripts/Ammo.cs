@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
-    void OnCollisionEnter2D(Collision2D other) {
+    void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("?");
         if (other.gameObject.tag == "Player") {
             other.gameObject.GetComponent<Character>().addAmmo();
+            GameObject.Destroy(gameObject);
         }
+        
     }
 }

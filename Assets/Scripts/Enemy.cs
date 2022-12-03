@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class Enemy : MonoBehaviour
 
 {
 
     [SerializeField] private float hp;
     [SerializeField] private float standStillSeconds;
     [SerializeField] private float playerDamage;
-    [SerializeField] private WorldDecomposer wd;
+    
 
     [SerializeField] private float pathFindingTime;
 
     [SerializeField] private float t;
 
+    [SerializeField] private GameObject ammo;
+
+    private WorldDecomposer wd;
     private int pathIndex;
 
     private GameObject character;
@@ -53,6 +56,7 @@ public class EnemyMovement : MonoBehaviour
 
          if (hp <= 0) {
             levelController.GetComponent<LevelController>().reduceKillCount();
+            spawnAmmo();
             GameObject.Destroy(gameObject);
         }
         
@@ -151,6 +155,10 @@ public class EnemyMovement : MonoBehaviour
         }
 
         return false;
+    }
 
+    private void spawnAmmo() {
+        Vector3 worldPosition = new Vector3(getNearestWorldNode(transform.position.x), getNearestWorldNode(transform.position.y), 0f);
+        GameObject ammoInstance = Instantiate(ammo, worldPosition, Quaternion.identity);
     }
 }
