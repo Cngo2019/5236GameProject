@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     {
         shootTimer = 0;
         walkTimer = 0;
-        health = 100;
+        health = Mathf.Infinity;
         ammo = 50;
 
     }
