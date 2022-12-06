@@ -183,7 +183,6 @@ MonoBehaviour:
   walkCooldown: 16
   walkTimer: 0
   shootTimer: 0
-  health: 0
 --- !u!61 &11116832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -438,7 +437,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnIntervalSec: 1
   enemy: {fileID: 6203770755450509400, guid: fc6f4e41131e47e4cbf354bfe8e992c4, type: 3}
-  nextRoom: Upgrade_Room_2
   wd: {fileID: 171974884}
   killRequirement: 20
 --- !u!4 &569581886

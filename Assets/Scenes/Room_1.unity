@@ -183,7 +183,6 @@ MonoBehaviour:
   walkCooldown: 16
   walkTimer: 0
   shootTimer: 0
-  health: 0
 --- !u!61 &11116832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -270,7 +269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11116829}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.5, y: -5.5, z: 0}
+  m_LocalPosition: {x: 5.5, y: 1.5, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -438,7 +437,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnIntervalSec: 2
   enemy: {fileID: 3143957372523764042, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
-  nextRoom: Upgrade_Room_1
   wd: {fileID: 0}
   killRequirement: 10
 --- !u!4 &569581886

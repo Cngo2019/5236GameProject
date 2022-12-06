@@ -146,7 +146,7 @@ public class Character : MonoBehaviour
 
     private void clampPlayer() {
         Vector2 charPosition = transform.position;
-        float horizontalBoundary = 7f;
+        float horizontalBoundary = 8f;
         float verticalBoundary = CameraBoundary.getCameraVerticalBoundary("MainCamera");
         charPosition.x = Mathf.Clamp(charPosition.x, -horizontalBoundary + .5f, horizontalBoundary - .5f);
         charPosition.y = Mathf.Clamp(charPosition.y, -verticalBoundary + .5f, verticalBoundary - .5f);

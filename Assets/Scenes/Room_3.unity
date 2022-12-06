@@ -179,13 +179,10 @@ MonoBehaviour:
   gameCamera: {fileID: 519420031}
   rb: {fileID: 11116830}
   bullet: {fileID: 8179823201529129097, guid: 8977fb1029986d947a7fd5b49adb4fd8, type: 3}
-  canShootCoolDown: 0.25
   canShoot: 1
   walkCooldown: 16
   walkTimer: 0
   shootTimer: 0
-  ammo: 0
-  health: 0
 --- !u!61 &11116832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -439,8 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnIntervalSec: 0.75
-  enemy: {fileID: 6203770755450509400, guid: fc6f4e41131e47e4cbf354bfe8e992c4, type: 3}
-  nextRoom: Win
+  enemy: {fileID: 2981020415860526570, guid: d55c1a7e4a537ba43826ff7a229a00c3, type: 3}
   wd: {fileID: 171974884}
   killRequirement: 50
 --- !u!4 &569581886

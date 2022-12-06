@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
     }
 
     private void handleMovement() {
-        if (computeTimer <= 0) {
+        if (computeTimer <= 0 || path.Count <= pathIndex) {
             computePath(character);
         }
         else {
@@ -142,7 +142,7 @@ public class Enemy : MonoBehaviour
         if (obj.tag == "Player") {
             if (standStillTimer <= 0) {
                 standStillTimer = standStillSeconds * Time.deltaTime;
-                obj.GetComponent<Character>().reduceHealth(5f);
+                obj.GetComponent<Character>().reduceHealth(playerDamage);
             }
             return;
         }
