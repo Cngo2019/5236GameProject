@@ -12,9 +12,9 @@ public class UpgradeManager: MonoBehaviour
     public int bulletPenetrationLives = 1;
     public float ammoNum = 30;
 
-    public float currentHealth = Mathf.Infinity;
+    public float currentHealth = 100f;
 
-    public float canWalkCoolDown = 4f;
+    public float canWalkCoolDown = 6f;
 
     void Awake() {
         if (Instance == null) {
@@ -30,6 +30,6 @@ public class UpgradeManager: MonoBehaviour
         firingRateCoolDown = .5f;
         bulletPenetrationLives = 1;
         ammoNum = 30;
-        currentHealth = Mathf.Infinity;
+        currentHealth = 100f;
     }
 }

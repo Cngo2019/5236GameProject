@@ -24,8 +24,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Upgrade_Room.unity
     guid: 78fa424da4333284ba3ce7636024f8b2
   - enabled: 0
-    path: Assets/Scenes/Upgrade_Room_2.unity
+    path: 
     guid: e7603409ecbe10d4a99f6e5e476410cb
+  - enabled: 1
+    path: Assets/Scenes/Instructions.unity
+    guid: b6fce19e6382abc4b92fae850784f0e8
   - enabled: 1
     path: Assets/Scenes/DeadMenu.unity
     guid: 9d316eb4bd3985f4fb1359c0154a8183
