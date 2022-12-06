@@ -22,5 +22,4 @@ public class UpgradeManager: MonoBehaviour
         Destroy(gameObject);
         
     }
-
 }
