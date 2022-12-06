@@ -438,7 +438,8 @@ MonoBehaviour:
   spawnIntervalSec: 0.75
   enemy: {fileID: 2981020415860526570, guid: d55c1a7e4a537ba43826ff7a229a00c3, type: 3}
   wd: {fileID: 171974884}
-  killRequirement: 50
+  killRequirement: 60
+  spawnCap: 10
 --- !u!4 &569581886
 Transform:
   m_ObjectHideFlags: 0

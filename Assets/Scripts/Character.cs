@@ -16,7 +16,6 @@ public class Character : MonoBehaviour
     [SerializeField] private bool canShoot;
     
 
-    [SerializeField] private float walkCooldown;
     [SerializeField] private float walkTimer;
     [SerializeField] private float shootTimer;
 
@@ -27,6 +26,9 @@ public class Character : MonoBehaviour
 
 
     private float health;
+
+    private float walkCooldown;
+
     
 
     // Start is called before the first frame update
@@ -37,6 +39,7 @@ public class Character : MonoBehaviour
         health = UpgradeManager.Instance.currentHealth;
         ammo = UpgradeManager.Instance.ammoNum;
         canShootCoolDown = UpgradeManager.Instance.firingRateCoolDown;
+        walkCooldown = UpgradeManager.Instance.canWalkCoolDown;
 
     }
 

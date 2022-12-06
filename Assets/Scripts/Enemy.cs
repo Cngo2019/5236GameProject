@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
 
          if (hp <= 0) {
             levelController.GetComponent<LevelController>().reduceKillCount();
+            levelController.GetComponent<LevelController>().reduceCurrent();
             spawnAmmo();
             GameObject.Destroy(gameObject);
         }

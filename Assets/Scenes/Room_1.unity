@@ -439,6 +439,7 @@ MonoBehaviour:
   enemy: {fileID: 3143957372523764042, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
   wd: {fileID: 0}
   killRequirement: 10
+  spawnCap: 10
 --- !u!4 &569581886
 Transform:
   m_ObjectHideFlags: 0
