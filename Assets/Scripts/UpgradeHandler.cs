@@ -8,7 +8,6 @@ public class UpgradeHandler : MonoBehaviour
 {
 
     [SerializeField] Button bpUpgradeButton;
-    [SerializeField] string nextRoom;
     void Awake() {
         if (UpgradeManager.Instance.bulletPenetration) {
             bpUpgradeButton.enabled = false;
@@ -16,16 +15,17 @@ public class UpgradeHandler : MonoBehaviour
     }
     public void UpgradeFiringRate() {
         UpgradeManager.Instance.firingRateCoolDown /= 2;
-        SceneManager.LoadScene(nextRoom);
+        SceneManager.LoadScene(SceneManagerData.Instance.getNextScene());
     }
 
     public void UpgradeBulletPenetration() {
         UpgradeManager.Instance.bulletPenetration = true;
-        SceneManager.LoadScene(nextRoom);
+        SceneManager.LoadScene(SceneManagerData.Instance.getNextScene());
     }
 
     public void UpgradeAmmo() {
         UpgradeManager.Instance.ammoNum *= 2;
-        SceneManager.LoadScene(nextRoom);
+        SceneManager.LoadScene(SceneManagerData.Instance.getNextScene());
     }
+
 }

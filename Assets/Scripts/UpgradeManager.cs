@@ -19,7 +19,12 @@ public class UpgradeManager: MonoBehaviour
             return;
         }
 
-        Destroy(gameObject);
-        
+        Destroy(gameObject); 
+    }
+
+    public void resetInstance() {
+        firingRateCoolDown = .5f;
+        bulletPenetration = false;
+        ammoNum = 30;
     }
 }

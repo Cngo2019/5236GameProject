@@ -9,8 +9,6 @@ public class LevelController : MonoBehaviour
     [SerializeField] private float spawnIntervalSec;
     [SerializeField] GameObject enemy;
 
-    [SerializeField] string nextRoom;
-
     [SerializeField] private WorldDecomposer wd;
 
 
@@ -75,7 +73,7 @@ public class LevelController : MonoBehaviour
 
     private void startNextLevel() {
         // Go to next room.
-        SceneManager.LoadScene(nextRoom);
+        SceneManager.LoadScene(SceneManagerData.Instance.getNextScene());
     }
 
     public float getKillRequirement() {

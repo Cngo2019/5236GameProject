@@ -21,9 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Win.unity
     guid: da28fc3779dccba44977b4937a92c27a
   - enabled: 1
-    path: Assets/Scenes/Upgrade_Room_1.unity
+    path: Assets/Scenes/Upgrade_Room.unity
     guid: 78fa424da4333284ba3ce7636024f8b2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Upgrade_Room_2.unity
     guid: e7603409ecbe10d4a99f6e5e476410cb
   - enabled: 1
