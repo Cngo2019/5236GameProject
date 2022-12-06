@@ -18,7 +18,9 @@ public class UpgradeManager: MonoBehaviour
 
     void Awake() {
         if (Instance == null) {
+
             Instance = this;
+            resetInstance();
             DontDestroyOnLoad(gameObject);
             return;
         }

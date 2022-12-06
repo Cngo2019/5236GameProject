@@ -1147,8 +1147,8 @@ MonoBehaviour:
   firingRateCoolDown: 0.5
   bulletPenetrationLives: 1
   ammoNum: 30
-  currentHealth: Infinity
-  canWalkCoolDown: 4
+  currentHealth: 100
+  canWalkCoolDown: 6
 --- !u!4 &1893398718
 Transform:
   m_ObjectHideFlags: 0
