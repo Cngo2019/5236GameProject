@@ -67,7 +67,6 @@ public class Enemy : MonoBehaviour
     }
 
     private void handleMovement() {
-        Debug.Log(path.Count);
         if (computeTimer <= 0) {
             computePath(character);
         }
