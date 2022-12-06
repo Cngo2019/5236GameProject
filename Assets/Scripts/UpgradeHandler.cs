@@ -23,4 +23,9 @@ public class UpgradeHandler : MonoBehaviour
         SceneManager.LoadScene(SceneManagerData.Instance.getNextScene());
     }
 
+    public void upgradeHealth() {
+        UpgradeManager.Instance.currentHealth += 50;
+        SceneManager.LoadScene(SceneManagerData.Instance.getNextScene());
+    }
+
 }

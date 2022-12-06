@@ -26,7 +26,7 @@ public class Character : MonoBehaviour
     private bool bulletPen;
 
 
-    [SerializeField] private float health;
+    private float health;
     
 
     // Start is called before the first frame update
@@ -34,7 +34,7 @@ public class Character : MonoBehaviour
     {
         shootTimer = 0;
         walkTimer = 0;
-        health = Mathf.Infinity;
+        health = UpgradeManager.Instance.currentHealth;
         ammo = UpgradeManager.Instance.ammoNum;
         canShootCoolDown = UpgradeManager.Instance.firingRateCoolDown;
 
