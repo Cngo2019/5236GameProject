@@ -59,7 +59,7 @@ public class WorldDecomposer : MonoBehaviour {
 
 				
 
-				Debug.Log("row, col " + row + " " + col + " has been mapped to" + y +" " + x);
+				//Debug.Log("row, col " + row + " " + col + " has been mapped to" + y +" " + x);
 				worldData [row, col] = new Node(row, col, y, x, true);
 			}
 		}
@@ -99,7 +99,7 @@ public class WorldDecomposer : MonoBehaviour {
 		for(int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				float randomRange = Random.value;
-				Debug.Log("random int " + randomRange);
+				//Debug.Log("random int " + randomRange);
 
 				// 7 and 16 is the player's starting position
 				if (randomRange < threshold && i != 7 && j != 16) {

@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
 
     
     [SerializeField] private GameObject bullet;
-    [SerializeField] private float canShootCoolDown;
+    
     
     [SerializeField] private bool canShoot;
     
@@ -20,7 +20,10 @@ public class Character : MonoBehaviour
     [SerializeField] private float walkTimer;
     [SerializeField] private float shootTimer;
 
-    [SerializeField] private float ammo;
+    private float canShootCoolDown;
+    private float ammo;
+
+    private bool bulletPen;
 
 
     [SerializeField] private float health;
@@ -32,8 +35,9 @@ public class Character : MonoBehaviour
         shootTimer = 0;
         walkTimer = 0;
         health = Mathf.Infinity;
-        ammo = 50;
-
+        ammo = UpgradeManager.Instance.ammoNum;
+        canShootCoolDown = UpgradeManager.Instance.firingRateCoolDown;
+        bulletPen = UpgradeManager.Instance.bulletPenetration;
     }
 
     // Update is called once per frame
