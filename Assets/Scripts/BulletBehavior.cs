@@ -6,14 +6,17 @@ public class BulletBehavior : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody2D rb;
+    private int bulletLives;
+
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         
         Vector3 direction = GameObject.Find("Character").transform.right;
         direction.Normalize();
         rb.velocity = direction * 15f;
+        bulletLives = UpgradeManager.Instance.bulletPenetrationLives;
 
     }
 
@@ -37,9 +40,13 @@ public class BulletBehavior : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Enemy" && !UpgradeManager.Instance.bulletPenetration) {
-            GameObject.Destroy(gameObject);
+        if (collision.gameObject.tag == "Enemy") {
+            bulletLives -= 1;
+            if (bulletLives <= 0) {
+                GameObject.Destroy(gameObject);
+            }
         }
+
     }
 
 

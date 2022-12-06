@@ -37,7 +37,7 @@ public class Character : MonoBehaviour
         health = Mathf.Infinity;
         ammo = UpgradeManager.Instance.ammoNum;
         canShootCoolDown = UpgradeManager.Instance.firingRateCoolDown;
-        bulletPen = UpgradeManager.Instance.bulletPenetration;
+
     }
 
     // Update is called once per frame

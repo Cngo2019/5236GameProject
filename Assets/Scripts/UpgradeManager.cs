@@ -9,7 +9,7 @@ public class UpgradeManager: MonoBehaviour
     public static UpgradeManager Instance { get; private set;}
 
     public float firingRateCoolDown = .5f;
-    public bool bulletPenetration = false;
+    public int bulletPenetrationLives = 1;
     public float ammoNum = 30;
 
     void Awake() {
@@ -24,7 +24,7 @@ public class UpgradeManager: MonoBehaviour
 
     public void resetInstance() {
         firingRateCoolDown = .5f;
-        bulletPenetration = false;
+        bulletPenetrationLives = 1;
         ammoNum = 30;
     }
 }
