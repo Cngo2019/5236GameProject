@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7240970743276232801, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
       propertyPath: playerDamage
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7240970743276232801, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
       propertyPath: pathFindingTime

@@ -175,6 +175,6 @@ public class Character : MonoBehaviour
     }
 
     public void addAmmo() {
-        this.ammo += 5;
+        this.ammo += 2;
     }
 }
