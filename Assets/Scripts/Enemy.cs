@@ -61,11 +61,9 @@ public class Enemy : MonoBehaviour
             GameObject.Destroy(gameObject);
         }
 
+        
         if (character != null) {
-            Vector2 direction = character.transform.position - transform.position;
-            direction.Normalize();
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
-            transform.rotation = Quaternion.Euler(Vector3.forward * (angle + 90f));
+            handleRotation();
         }
         
         if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
@@ -75,6 +73,15 @@ public class Enemy : MonoBehaviour
 
         
     }
+
+    private void handleRotation() {
+        Vector3 objLoc = new Vector3(currentNodeLocation.x, currentNodeLocation.y, 0f);
+        Vector2 direction = objLoc - transform.position;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
+        transform.rotation = Quaternion.Euler(Vector3.forward * (angle + 90f));
+    }
+    
 
     private void handleMovement() {
         if (computeTimer <= 0 || path.Count <= pathIndex) {

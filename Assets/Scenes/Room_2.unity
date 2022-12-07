@@ -180,7 +180,6 @@ MonoBehaviour:
   rb: {fileID: 11116830}
   bullet: {fileID: 8179823201529129097, guid: 8977fb1029986d947a7fd5b49adb4fd8, type: 3}
   canShoot: 1
-  walkCooldown: 16
   walkTimer: 0
   shootTimer: 0
 --- !u!61 &11116832
@@ -439,7 +438,7 @@ MonoBehaviour:
   enemy: {fileID: 6203770755450509400, guid: fc6f4e41131e47e4cbf354bfe8e992c4, type: 3}
   wd: {fileID: 171974884}
   killRequirement: 40
-  spawnCap: 10
+  spawnCap: 5
 --- !u!4 &569581886
 Transform:
   m_ObjectHideFlags: 0
