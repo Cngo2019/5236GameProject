@@ -15,15 +15,12 @@ public class LevelController : MonoBehaviour
     private GameObject player;
     
     [SerializeField] private float killRequirement;
-    [SerializeField] int spawnCap;
     private float spawnTimer;
-    private int current;
 
     private bool hudInstantiated;
     // Start is called before the first frame update
     void Start()
     {
-        current = 0;
         spawnTimer = spawnIntervalSec;
         player = GameObject.Find("Character");
         wd = GameObject.Find("WorldDecomposer").GetComponent<WorldDecomposer>();
@@ -36,10 +33,8 @@ public class LevelController : MonoBehaviour
         if (spawnTimer >= 0) {
              spawnTimer -= Time.deltaTime;
          } else {
-            Debug.Log(spawnCap >= current);
             // If we successfuly spawn a zombie reset the timer.
-            if (spawnCap >= current && spawnEnemyZombie()) {
-                current += 1;
+            if (spawnEnemyZombie()) {
                 spawnTimer = spawnIntervalSec;
             }
                     
@@ -76,9 +71,6 @@ public class LevelController : MonoBehaviour
         this.killRequirement -= 1;
     }
 
-    public void reduceCurrent() {
-        this.current -= 1;
-    }
     private void startNextLevel() {
         // Go to next room.
         SceneManager.LoadScene(SceneManagerData.Instance.getNextScene());
