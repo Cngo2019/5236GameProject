@@ -43,7 +43,7 @@ public class BulletBehavior : MonoBehaviour
         if (collision.gameObject.tag == "Enemy") {
             bulletLives -= 1;
             if (bulletLives <= 0) {
-                //GameObject.Destroy(gameObject);
+                GameObject.Destroy(gameObject);
             }
         }
 
