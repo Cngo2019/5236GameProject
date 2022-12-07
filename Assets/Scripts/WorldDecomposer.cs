@@ -87,9 +87,9 @@ public class WorldDecomposer : MonoBehaviour {
 			case 1:
 			    return randomlyGenerateWalls(.1f);
 			case 2:
-				return randomlyGenerateWalls(.25f);
+				return randomlyGenerateWalls(.15f);
 			default:
-				return randomlyGenerateWalls(.3f);
+				return randomlyGenerateWalls(.175f);
 		}
 		
 	}
