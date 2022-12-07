@@ -54,16 +54,25 @@ public class Enemy : MonoBehaviour
         }
 
 
-         if (hp <= 0) {
+        if (hp <= 0) {
             levelController.GetComponent<LevelController>().reduceKillCount();
             levelController.GetComponent<LevelController>().reduceCurrent();
             spawnAmmo();
             GameObject.Destroy(gameObject);
         }
+
+        if (character != null) {
+            Vector2 direction = character.transform.position - transform.position;
+            direction.Normalize();
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
+            transform.rotation = Quaternion.Euler(Vector3.forward * (angle + 90f));
+        }
         
         if (levelController.GetComponent<LevelController>().getKillRequirement() <= 0) {
             GameObject.Destroy(gameObject);
         }
+
+
         
     }
 
