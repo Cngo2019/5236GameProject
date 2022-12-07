@@ -31,6 +31,6 @@ public class UpgradeManager: MonoBehaviour
         this.firingRateCoolDown = .5f;
         this.bulletPenetrationLives = 1;
         this.ammoNum = 30;
-        this.currentHealth = Mathf.Infinity;
+        this.currentHealth = 100f;
     }
 }
