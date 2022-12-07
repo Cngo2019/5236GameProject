@@ -8,17 +8,16 @@ public class UpgradeManager: MonoBehaviour
 
     public static UpgradeManager Instance { get; private set;}
 
-    public float firingRateCoolDown = .5f;
-    public int bulletPenetrationLives = 1;
-    public float ammoNum = 30;
+    public float firingRateCoolDown;
+    public int bulletPenetrationLives;
+    public float ammoNum;
 
-    public float currentHealth = 100f;
+    public float currentHealth;
 
-    public float canWalkCoolDown = 6f;
+    public float canWalkCoolDown;
 
     void Awake() {
         if (Instance == null) {
-
             Instance = this;
             resetInstance();
             DontDestroyOnLoad(gameObject);
@@ -29,9 +28,9 @@ public class UpgradeManager: MonoBehaviour
     }
 
     public void resetInstance() {
-        firingRateCoolDown = .5f;
-        bulletPenetrationLives = 1;
-        ammoNum = 30;
-        currentHealth = 100f;
+        this.firingRateCoolDown = .5f;
+        this.bulletPenetrationLives = 1;
+        this.ammoNum = 30;
+        this.currentHealth = Mathf.Infinity;
     }
 }

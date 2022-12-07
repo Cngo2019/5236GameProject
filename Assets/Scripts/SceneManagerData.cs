@@ -11,13 +11,13 @@ public class SceneManagerData : MonoBehaviour
 
     public static SceneManagerData Instance { get; private set;}
 
-    public string[] nextLevel;
-    private int currScene = 0;
+    public string[] roomSequence;
+    private int currScene;
 
     void Awake() {
         if (Instance == null) {
             Instance = this;
-            Instance.nextLevel = new string[] {"Room_1", "Upgrade_Room", "Room_2", "Upgrade_Room", "Room_3", "Win"};
+            this.initialize();
             DontDestroyOnLoad(gameObject);
             return;
         }
@@ -25,9 +25,14 @@ public class SceneManagerData : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void initialize() {
+        this.roomSequence = new string[] {"Room_1", "Upgrade_Room", "Room_2", "Upgrade_Room", "Room_3", "Win"};
+        this.currScene = 0;
+    }
+
+
     public string getNextScene() {
-        Debug.Log(nextLevel[currScene]);
-        return nextLevel[currScene++];
+        return this.roomSequence[currScene++];
     }
 
     public void resetInstance() {
