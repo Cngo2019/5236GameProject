@@ -123,7 +123,7 @@ public class Enemy : MonoBehaviour
         if (path.Count > 0) {
             pathIndex = 0;
             currentNodeLocation = new Vector2(path[pathIndex].getWorldX(), path[pathIndex].getWorldZ());
-            computeTimer = pathFindingTime * Time.deltaTime;
+            computeTimer = pathFindingTime;
         } else {
             // Means I have spawned somewhere that is not pathable to player
             GameObject.Destroy(gameObject);
@@ -157,7 +157,7 @@ public class Enemy : MonoBehaviour
         GameObject obj = collision.gameObject;
         if (obj.tag == "Player") {
             if (standStillTimer <= 0) {
-                standStillTimer = standStillSeconds * Time.deltaTime;
+                standStillTimer = standStillSeconds;
                 obj.GetComponent<Character>().reduceHealth(playerDamage);
             }
             return;

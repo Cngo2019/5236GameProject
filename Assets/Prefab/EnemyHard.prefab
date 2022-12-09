@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7240970743276232801, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
       propertyPath: t
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7240970743276232801, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
       propertyPath: playerDamage
@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7240970743276232801, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}
       propertyPath: pathFindingTime
-      value: 180
+      value: 270
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 792aed0550092f442b5e8fb5351544ee, type: 3}

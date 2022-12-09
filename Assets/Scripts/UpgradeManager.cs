@@ -32,6 +32,6 @@ public class UpgradeManager: MonoBehaviour
         this.bulletPenetrationLives = 1;
         this.ammoNum = 30;
         this.currentHealth = 100f;
-        this.canWalkCoolDown = 32f;
+        this.canWalkCoolDown = .1f;
     }
 }

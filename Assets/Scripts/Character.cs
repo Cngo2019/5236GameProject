@@ -80,7 +80,7 @@ public class Character : MonoBehaviour
             }
             
         }
-        walkTimer = walkCooldown * Time.deltaTime;
+        walkTimer = walkCooldown;
         return false;
     }
     /**

@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  standStillSeconds: 120
+  standStillSeconds: 1
   playerDamage: 10
   pathFindingTime: 360
-  t: 5
+  t: 3
   ammo: {fileID: 7926314379066690643, guid: 2f64119a3d44ffd4ba7e2e4b5d2b7151, type: 3}
